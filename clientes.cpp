@@ -105,7 +105,8 @@ Transacciones* Clientes::gettransacciones() {
 
 void Clientes::muestra_datosclien() {
     cout << "Cliente numero: " << numcliente << ": " << nombre << " " << apellido << endl;
-    cout << "DNI: " << dni << ", Tipo de cliente: " << tipocliente << endl;
+    cout << "DNI: " << dni << endl;
+    cout<< "Tipo de cliente: " << tipocliente << endl;
 
 
 }
@@ -117,9 +118,56 @@ void Clientes::consultar_saldo() {
 }
 
 void Clientes::hacer_transaccion() {
+    int tipo_transaccion;
+    int monto;
+    int moneda;
+
     cout << "Elija el tipo de transaccion que desea efectuar: " << endl;
     cout << "1) Extraccion de dinero " << endl;
     cout << "2) Deposito de dinero " << endl;
+    cin >> tipo_transaccion;
+
+    cout << "Seleccione la moneda: " << endl;
+    cout << "1) Pesos" << endl;
+    cout << "2) Dólares" << endl;
+    cin >> moneda;
+
+    cout << "Ingrese el monto: ";
+    cin >> monto;
+
+    switch(tipo_transaccion) {
+        case 1:
+            if(moneda == 1) {
+                if(caja_pesos >= monto) {
+                    caja_pesos -= monto;
+                    cout << "Extracción exitosa. Nuevo saldo en pesos: " << caja_pesos << endl;
+                } else {
+                    cout << "Fondos insuficientes en pesos." << endl;
+                }
+            } else if(moneda == 2) {
+                if(caja_dolar >= monto) {
+                    caja_dolar -= monto;
+                    cout << "Extracción exitosa. Nuevo saldo en dólares: " << caja_dolar << endl;
+                } else {
+                    cout << "Fondos insuficientes en dólares." << endl;
+                }
+            }
+            break;
+
+        case 2:
+            if(moneda == 1) {
+                caja_pesos += monto;
+                cout << "Depósito exitoso. Nuevo saldo en pesos: " << caja_pesos << endl;
+            } else if(moneda == 2) {
+                caja_dolar += monto;
+                cout << "Depósito exitoso. Nuevo saldo en dólares: " << caja_dolar << endl;
+            }
+            break;
+
+        default:
+            cout << "Opción no válida." << endl;
+            break;
+    }
 }
 
 void Clientes::solic_tarj() {
