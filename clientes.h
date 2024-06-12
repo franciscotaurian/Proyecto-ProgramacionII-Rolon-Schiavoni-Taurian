@@ -1,3 +1,6 @@
+#ifndef CLIENTES_H
+#define CLIENTES_H
+
 #include <iostream>
 #include "transacciones.h"
 #include "tarjeta.h"
@@ -44,6 +47,8 @@ class Clientes{
         void hacer_transaccion();
         void pedir_baja();
 };
+
+#endif
 
 
 

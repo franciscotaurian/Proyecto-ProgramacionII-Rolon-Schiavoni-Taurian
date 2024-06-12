@@ -59,20 +59,7 @@ char *banco::getDireccion()
 void banco::muestraListado()
 {
     ofstream listadoClientes;
-    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientestxt");
-    listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
-    for (int i = 0; i < nClientes; i++)
-    {
-        listadoClientes << "Cliente n: " << listado[i].getNumCliente()<<":" << endl;
-        listadoClientes << "Nombre: " << listado[i].getNombre() << "." << endl;
-        listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
-        listadoClientes << "Dni: " << listado[i].getDni() << "." << endl;
-        listadoClientes << "Tipo de cliente: " << listado[i].getTipocliente() << "." << endl;
-    }
-}void banco::muestraListado()
-{
-    ofstream listadoClientes;
-    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientestxt");
+    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/txt/listadoClientestxt");
     listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
     for (int i = 0; i < nClientes; i++)
     {

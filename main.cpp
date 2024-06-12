@@ -22,6 +22,7 @@ bool checkletra(char array[])
     return true;
 }
 
+
 void menuEmpleado()
 {
     cout << "**********MENU**********" << endl;
@@ -40,7 +41,21 @@ void menuCliente()
     cout << "3) Realizar una transaccion" << endl;
     cout << "Ingrese un opcion" << endl;
 }
-
+bool clienteExistente(int _dni)
+{
+    Clientes *c = new Clientes[100];
+    c = banco1.getlistado();
+    int cantClientes = banco1.getnClientes();
+    bool existe = false;
+    for (int i = 0; i <= cantClientes; i++)
+    {
+        if (c[i].getDni() == _dni)
+        {
+            existe = true;
+        }
+    }
+    return existe;
+}
 
 void AgregarCliente()
 {
@@ -51,13 +66,14 @@ void AgregarCliente()
     cout << "Ingrese el Dni del cliente" << endl;
     cin >> dni;
 
-    if (clienteExistente(dni) == false)
+    if (clienteExistente(dni) == true)
     {
         cout << "El cliente que desea agregar ya existe" << endl;
     }
     else
     {
         cout << "Ingrese el nombre" << endl;
+        cin.ignore();
         cin.getline(nombre, 20, '\n');
         if (checkletra(nombre) == false)
         {
@@ -223,22 +239,6 @@ void validarAntiguedad() {
     }
 */
 
-bool clienteExistente(int _dni)
-{
-    Clientes *c = new Clientes[100];
-    c = banco1.getlistado();
-    int cantClientes = banco1.getnClientes();
-    bool existe = false;
-    for (int i = 0; i <= cantClientes; i++)
-    {
-        if (c[i].getDni() == _dni)
-        {
-            existe = true;
-        }
-    }
-    return existe;
-}
-
 Clientes* clienteExiste(int _dni)
 {
     Clientes* c = banco1.getlistado();
@@ -300,6 +300,7 @@ int main()
     char nombreB[20], direccionB[20];
 
     cout << "Ingrese el nombre del banco: ";
+    cin.ignore();
     cin.getline(nombreB, 20);
     cout << "Ingrese la dirección del banco: ";
     cin.getline(direccionB, 20);
@@ -318,7 +319,10 @@ int main()
                 EliminarCliente();
                 break;
             case 3:
-                
+                mostrarCLiente();
+                break;
+            case 4:
+                generarLista();
                 break;
             case 0:
                 cout << "Saliendo del menu empleado..." << endl;

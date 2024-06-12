@@ -1,3 +1,6 @@
+#ifndef TARJETA_H
+#define TARJETA_H
+
 #include <iostream>
 using namespace std;
 
@@ -16,3 +19,5 @@ public:
     int getLimiteCredito();
     //void asignarTarjeta(Clientes&);
 };
+
+#endif

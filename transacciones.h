@@ -1,3 +1,6 @@
+#ifndef TRANSACCIONES_H
+#define TRANSACCIONES_H
+
 #include <iostream>
 using namespace std;
 
@@ -23,6 +26,6 @@ class Transacciones{
     int getDia();
     int getMes();
     int getAnio();
-   
-    
 };
+
+#endif
