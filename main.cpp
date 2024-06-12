@@ -41,21 +41,6 @@ void menuCliente()
     cout << "Ingrese un opcion" << endl;
 }
 
-bool clienteExistente(int _dni)
-{
-    Clientes *c = new Clientes[100];
-    c = banco1.getlistado();
-    int cantClientes = banco1.getnClientes();
-    bool existe = false;
-    for (int i = 0; i <= cantClientes; i++)
-    {
-        if (c[i].getDni() == _dni)
-        {
-            existe = true;
-        }
-    }
-    return existe;
-}
 
 void AgregarCliente()
 {
@@ -132,12 +117,15 @@ void generarLista(){
     banco1.muestraListado();
 }
 
-void VerListado(){
-    
-}
 
-void hacerTransaccion(Clientes cliente)
+
+void hacerTransaccion(Clientes* cliente)
 {
+    if (cliente == nullptr) {
+        cout << "El cliente no existe." << endl;
+        return;
+    }
+
     int tipo_transaccion, moneda;
     float monto;
 
@@ -157,10 +145,10 @@ void hacerTransaccion(Clientes cliente)
     case 1:
         if (moneda == 1)
         {
-            if (cliente.getCajaPesos() >= monto)
+            if (cliente->getCaja_pesos() >= monto)
             {
-                cliente.setCajaPesos(cliente.getCajaPesos() - monto);
-                cout << "Extracción exitosa. Nuevo saldo en pesos: " << cliente.getCajaPesos() << endl;
+                cliente->setCaja_pesos(cliente->getCaja_pesos() - monto);
+                cout << "Extracción exitosa. El saldo actual en pesos es: " << cliente->getCaja_pesos() << endl;
             }
             else
             {
@@ -169,10 +157,10 @@ void hacerTransaccion(Clientes cliente)
         }
         else if (moneda == 2)
         {
-            if (cliente.getCajaDolar() >= monto)
+            if (cliente->getCaja_dolar() >= monto)
             {
-                cliente.setCajaDolar(cliente.getCajaDolar() - monto);
-                cout << "Extracción exitosa. Nuevo saldo en dólares: " << cliente.getCajaDolar() << endl;
+                cliente->setCaja_dolar(cliente->getCaja_dolar() - monto);
+                cout << "Extracción exitosa. El saldo actual en dólares es: " << cliente->getCaja_dolar() << endl;
             }
             else
             {
@@ -184,13 +172,13 @@ void hacerTransaccion(Clientes cliente)
     case 2:
         if (moneda == 1)
         {
-            cliente.setCajaPesos(cliente.getCajaPesos() + monto);
-            cout << "Depósito exitoso. Nuevo saldo en pesos: " << cliente.getCajaPesos() << endl;
+            cliente->setCaja_pesos(cliente->getCaja_pesos() + monto);
+            cout << "Depósito exitoso. Saldo actual en pesos: " << cliente->getCaja_pesos() << endl;
         }
         else if (moneda == 2)
         {
-            cliente.setCajaDolar(cliente.getCajaDolar() + monto);
-            cout << "Depósito exitoso. Nuevo saldo en dólares: " << cliente.getCajaDolar() << endl;
+            cliente->setCaja_dolar(cliente->getCaja_dolar() + monto);
+            cout << "Depósito exitoso. Saldo actual en dólares: " << cliente->getCaja_dolar() << endl;
         }
         break;
 
@@ -199,6 +187,21 @@ void hacerTransaccion(Clientes cliente)
         break;
     }
 }
+
+
+void verDatos(Clientes* cli) {
+
+
+            cout << "Datos del Cliente:" << endl;
+            cout << "Nombre: " << cli->getNombre() << endl;
+            cout << "Apellido: " << cli->getApellido() << endl;
+            cout << "DNI: " << cli->getDni() << endl;
+            cout << "Tipo de Cliente: " << cli->getTipocliente() << endl;
+          
+    }
+    
+
+
 
 /*
 void validarAntiguedad() {
@@ -213,12 +216,42 @@ void validarAntiguedad() {
     cout<< tipocliente <<endl;
     limiteCredito = 250000;
     } else {
-        tipocliente = "Platino";
+        tipocliente = "Platio";
         cout<< tipocliente <<endl;
         limiteCredito = 500000;
         }
     }
 */
+
+bool clienteExistente(int _dni)
+{
+    Clientes *c = new Clientes[100];
+    c = banco1.getlistado();
+    int cantClientes = banco1.getnClientes();
+    bool existe = false;
+    for (int i = 0; i <= cantClientes; i++)
+    {
+        if (c[i].getDni() == _dni)
+        {
+            existe = true;
+        }
+    }
+    return existe;
+}
+
+Clientes* clienteExiste(int _dni)
+{
+    Clientes* c = banco1.getlistado();
+    int cantClientes = banco1.getnClientes();
+    for (int i = 0; i < cantClientes; i++) 
+    {
+        if (c[i].getDni() == _dni)
+        {
+            return &c[i]; // Devolver el puntero al cliente si se encuentra
+        }
+    }
+    return nullptr; // si no se encuentra
+}
 
 int main()
 {
@@ -228,30 +261,39 @@ int main()
 
     if (tipoUsuario == 1)
     {
-        int opcionCliente;
-        do
-        {
-            menuCliente();
-            cin >> opcionCliente;
-            switch (opcionCliente)
-            {
-            case 1:
-               
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                hacerTransaccion(cliente);
-                break;
-            case 0:
-                cout << "Saliendo del menu cliente..." << endl;
-                break;
-            default:
-                cout << "Opcion no valida." << endl;
-            }
-        } while (opcionCliente != 0);
+      int dni;
+      cout << "Ingrese su DNI: ";
+      cin >> dni;
+
+        Clientes* clienteActual = clienteExiste(dni);
+        if (clienteActual != nullptr) 
+        { 
+            int opcion;
+            do {
+                menuCliente();
+                cin >> opcion;
+                switch (opcion) {
+                case 1:
+                    verDatos(clienteActual); 
+                    break;
+                case 2:
+                    cout << "Dinero en cuenta:" << endl;
+                    cout << "Pesos: " << clienteActual->getCaja_pesos() << endl;
+                    cout << "Dólares: " << clienteActual->getCaja_dolar() << endl;
+                    break;
+                case 3:
+                    hacerTransaccion(clienteActual); 
+                    break;
+                default:
+                    cout << "Opción no válida" << endl;
+                    break;
+                }
+            } while (opcion != 0); 
+        } else {
+            cout << "El cliente no existe." << endl;
+        }
     }
+
     else if (tipoUsuario == 2)
     {
         
@@ -276,7 +318,7 @@ int main()
                 EliminarCliente();
                 break;
             case 3:
-                VerListado();
+                
                 break;
             case 0:
                 cout << "Saliendo del menu empleado..." << endl;
