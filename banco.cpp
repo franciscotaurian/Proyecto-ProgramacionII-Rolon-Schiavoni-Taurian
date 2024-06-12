@@ -7,6 +7,7 @@ using namespace std;
 
 banco::banco()
 {
+
 }
 
 banco::banco(char _nombre[], char _direccion[])
@@ -25,6 +26,22 @@ void banco::setDireccion(char adress[])
     strcpy(direccion, adress);
 }
 
+void banco::incrementarNClientes(){
+    nClientes++;
+}
+
+void banco::ActualizarLista(Clientes nuevalista[]){
+    for (int i = 0; i <= nClientes; i++)
+    {
+        listado[i]=nuevalista[i];
+    }
+    
+}
+
+int banco::getnClientes(){
+    return nClientes;
+}
+
 char *banco::getNombre()
 {
     char *p = new char[20];
@@ -39,14 +56,27 @@ char *banco::getDireccion()
     return p;
 }
 
-void banco::getListado()
+void banco::muestraListado()
 {
     ofstream listadoClientes;
-    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/txt");
+    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientestxt");
     listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
     for (int i = 0; i < nClientes; i++)
     {
-        listadoClientes << "Cliente n: " << listado[i].<< ":" << endl;
+        listadoClientes << "Cliente n: " << listado[i].getNumCliente()<<":" << endl;
+        listadoClientes << "Nombre: " << listado[i].getNombre() << "." << endl;
+        listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
+        listadoClientes << "Dni: " << listado[i].getDni() << "." << endl;
+        listadoClientes << "Tipo de cliente: " << listado[i].getTipocliente() << "." << endl;
+    }
+}void banco::muestraListado()
+{
+    ofstream listadoClientes;
+    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientestxt");
+    listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
+    for (int i = 0; i < nClientes; i++)
+    {
+        listadoClientes << "Cliente n: " << listado[i].getNumCliente()<<":" << endl;
         listadoClientes << "Nombre: " << listado[i].getNombre() << "." << endl;
         listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
         listadoClientes << "Dni: " << listado[i].getDni() << "." << endl;
@@ -54,10 +84,21 @@ void banco::getListado()
     }
 }
 
+
+Clientes *banco::getlistado(){
+    Clientes *p= new Clientes[100];
+    for (int i = 0; i < nClientes; i++)
+    {
+        p[i]=listado[i];
+    }
+    return p;
+
+}
+
 void banco::muestraDatos(int posicion)
 {
 
-        cout << "Numero de cliente: " << listado[posicion].get << endl;
+        cout << "Numero de cliente: " << listado[posicion].getNumCliente()<< endl;
         cout << "Nombre: " << listado[posicion].getNombre() << endl;
         cout << "Apellido: " << listado[posicion].getApellido() << endl;
         cout << "Dni: " << listado[posicion].getDni() << endl;
@@ -73,4 +114,6 @@ void banco::altaClientes(Clientes _cliente){
     nClientes++;
 }
 
-void()
+void banco::bajaClientes(int nclient){
+    listado[nclient].setEstado("Baja");
+}

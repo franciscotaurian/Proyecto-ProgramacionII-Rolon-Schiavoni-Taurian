@@ -13,9 +13,13 @@ class banco {
         banco(char[],char[]);
         void setNombre(char[]);
         void setDireccion(char[]);
+        void incrementarNClientes();
+        void ActualizarLista(Clientes[]);
+        int getnClientes();
         char *getNombre();
         char *getDireccion();
-        void getListado ();
+        Clientes *getlistado();
+        void muestraListado ();
         void muestraDatos (int);
         void altaClientes(Clientes);
         void bajaClientes(int);

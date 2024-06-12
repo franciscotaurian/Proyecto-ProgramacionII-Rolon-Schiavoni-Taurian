@@ -1,5 +1,6 @@
 #include <iostream>
 #include "transacciones.h"
+#include "tarjeta.h"
 using namespace std;
 
 class Clientes{
@@ -13,12 +14,14 @@ class Clientes{
     int anioingreso;
     string estado;
     Transacciones trans_clientes[100];
+    Tarjeta tipotarjeta;
     int caja_pesos;
     int caja_dolar;
 
     public:
     Clientes();
-    Clientes(int, int, string, int, string, char[], char[]);
+    Clientes(int, int, int, char[], char[]);
+        void setNcliente(int);
         void setNombre(char[]);
         void setApellido(char[]);
         void setDni(int);
@@ -27,6 +30,7 @@ class Clientes{
         void setCaja_dolar(int);
         void setEstado(string);
         void setTipocliente(string);
+        int getNumCliente();
         char *getNombre();
         char *getApellido();
         int getDni();
@@ -36,13 +40,9 @@ class Clientes{
         string getEstado();
         string getTipocliente();
         Transacciones *gettransacciones();
-        void muestra_datosclien();
         void consultar_saldo();
         void hacer_transaccion();
-        void solic_tarj();
         void pedir_baja();
-
-
 };
 
 
