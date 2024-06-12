@@ -26,9 +26,6 @@ void banco::setDireccion(char adress[])
     strcpy(direccion, adress);
 }
 
-void banco::incrementarNClientes(){
-    nClientes++;
-}
 
 void banco::ActualizarLista(Clientes nuevalista[]){
     for (int i = 0; i <= nClientes; i++)
@@ -59,17 +56,33 @@ char *banco::getDireccion()
 void banco::muestraListado()
 {
     ofstream listadoClientes;
-    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/txt/listadoClientestxt");
+    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientes.txt");
+    
+    if (!listadoClientes) {
+        cerr << "Error al abrir el archivo listadoClientes.txt" << endl;
+        return;
+    }
+
     listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
     for (int i = 0; i < nClientes; i++)
     {
-        listadoClientes << "Cliente n: " << listado[i].getNumCliente()<<":" << endl;
+        listadoClientes << "Cliente n: " << listado[i].getNumCliente() << ":" << endl;
         listadoClientes << "Nombre: " << listado[i].getNombre() << "." << endl;
         listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
         listadoClientes << "Dni: " << listado[i].getDni() << "." << endl;
         listadoClientes << "Tipo de cliente: " << listado[i].getTipocliente() << "." << endl;
+        cout<<""<<endl;
+    }
+    
+    listadoClientes.close();
+    
+    if (listadoClientes.fail()) {
+        cerr << "Error al cerrar el archivo listadoClientes.txt" << endl;
+    } else {
+        cout << "Archivo generado correctamente." << endl;
     }
 }
+
 
 
 Clientes *banco::getlistado(){

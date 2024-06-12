@@ -30,6 +30,7 @@ void menuEmpleado()
     cout << "2) Eliminar Cliente" << endl;
     cout << "3) Mostrar Datos de Cliente" << endl;
     cout << "4) Generar Archivo de clientes" << endl;
+    cout << "0) Salir"<<endl;
     cout << "Ingrese un opcion" << endl;
 }
 
@@ -39,8 +40,11 @@ void menuCliente()
     cout << "1) Ver mis datos" << endl;
     cout << "2) Ver dinero en cuenta" << endl;
     cout << "3) Realizar una transaccion" << endl;
+    cout<< "4) Cambiar a empleado"<<endl;
+    cout<< "0) Salir"<<endl;
     cout << "Ingrese un opcion" << endl;
 }
+
 bool clienteExistente(int _dni)
 {
     Clientes *c = new Clientes[100];
@@ -99,11 +103,10 @@ void AgregarCliente()
         cliente.setDni(dni);
         cliente.setAnioingreso(anioingreso);
 
-        banco1.incrementarNClientes();
-
         banco1.altaClientes(cliente);
 
         cout<<"Cliente cargado con exito"<<endl;
+        cout<<"El numero asignado al nuevo cliente es: "<<(banco1.getnClientes()-1)<<endl;
     }
 }
 
@@ -120,7 +123,7 @@ void mostrarCLiente(){
     cout<<"Ingrese el numero de Cliente"<<endl;
     cin>>ncliente;
 
-    if (ncliente>banco1.getnClientes())
+    if (ncliente>=banco1.getnClientes())
     {
         cout<<"El numero de cliente no existe"<<endl;
     }
@@ -284,12 +287,16 @@ int main()
                 case 3:
                     hacerTransaccion(clienteActual); 
                     break;
+                case 4:
+                    tipoUsuario=2;
+                    break;
                 default:
                     cout << "Opción no válida" << endl;
                     break;
                 }
-            } while (opcion != 0); 
-        } else {
+            } while (opcion != 0 || opcion); 
+        } 
+        else {
             cout << "El cliente no existe." << endl;
         }
     }

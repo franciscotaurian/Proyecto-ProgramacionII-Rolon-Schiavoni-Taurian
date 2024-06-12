@@ -1,0 +1,6 @@
+-------------LISTADO DE CLIENTES----------
+Cliente n: 0:
+Nombre: Francisco.
+Apellido: Taurian.
+Dni: 46068014.
+Tipo de cliente: Plata.
