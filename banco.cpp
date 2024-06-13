@@ -7,13 +7,14 @@ using namespace std;
 
 banco::banco()
 {
-
+    nEmpleado=0;
 }
 
 banco::banco(char _nombre[], char _direccion[])
 {
     strcpy(nombre, _nombre);
     strcpy(direccion, _direccion);
+    nEmpleado=0;
 }
 
 void banco::setNombre(char name[])
@@ -26,6 +27,13 @@ void banco::setDireccion(char adress[])
     strcpy(direccion, adress);
 }
 
+void banco::incrementarnEmpleados(){
+    nEmpleado++;
+}
+
+int banco::getnEmpleado(){
+    return nEmpleado;
+}
 
 void banco::ActualizarLista(Clientes nuevalista[]){
     for (int i = 0; i <= nClientes; i++)

@@ -4,6 +4,7 @@
 #include "banco.h"
 #include "tarjeta.h"
 #include "clientes.h"
+#include "empleado.h"
 #include "transacciones.h"
 using namespace std;
 
@@ -275,7 +276,6 @@ Clientes* clienteExiste(int _dni)
 int main() {
     int tipoUsuario;
 
-    do {
         char nombreB[20], direccionB[20];
         cout << "Ingrese el nombre del banco: ";
         cin.ignore();
@@ -285,6 +285,7 @@ int main() {
         cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
         cin >> tipoUsuario;
 
+    do {
         if (tipoUsuario == 1) {
             int dni;
             cout << "Ingrese su DNI: ";
@@ -321,7 +322,30 @@ int main() {
             }
         } else if (tipoUsuario == 2) {
     
+            if(banco1.getnEmpleado()==0){
+                char ne[20],ae[20];
+                int dnie;
+                Empleado e1;
+                cout<<"Ingrese el Nombre del empleado"<<endl;
+                cin.ignore();
+                cin.getline(ne, 20, '\n');
+                cout<<"Ingrese el apellido del empleado"<<endl;
+                cin.getline(ae, 20, '\n');
+                cout<<"Ingrese el Dni del empleado"<<endl;
+                cin>>dnie;
 
+                Empleado empleado1;
+
+                empleado1.setNombre(ne);
+                empleado1.setApellido(ae);
+                empleado1.setDni(dnie);
+                empleado1.setnEmpleado(1);
+                
+                banco1.incrementarnEmpleados();
+
+                cout<<"Empleado cargado con exito"<<endl;
+
+            }
 
             int opcionEmpleado;
             do {

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
+#include "persona.h"
 #include "transacciones.h"
 #include "clientes.h"
 using namespace std;
@@ -14,36 +15,18 @@ Clientes::Clientes() {
    tipocliente="Plata";
 }
 
-Clientes::Clientes(int nc, int d, int ai, char nom[], char ap[]){
-   numcliente= nc;
-   dni= d;
+Clientes::Clientes(int nc, int d, int ai, char nom[], char ap[]):Persona(nom,ap,d){
    tipocliente= "Plata";
    anioingreso= ai;
    estado= "Alta";
    caja_pesos= 0;
    caja_dolar= 0;
-   strcpy(nombre, nom);
-   strcpy(apellido, ap);  
-
-
 }
 
 void Clientes::setNcliente(int ncliente){
     numcliente=ncliente;
 }
 
-void Clientes::setNombre(char nom[]) {
-    strcpy(nombre,nom);
-}
-
-void Clientes::setApellido(char ap[]) {
-    strcpy(apellido, ap);
-}
-
-
-void Clientes::setDni(int d) {
-    dni = d;
-}
 
 void Clientes::setAnioingreso(int ai) {
     anioingreso = ai;
@@ -69,22 +52,6 @@ int Clientes::getNumCliente(){
     return numcliente;
 }
 
-char *Clientes::getNombre() {
-    char *p= new char[20];
-    strcpy(p, nombre);
-    return p;
-}
-
-
-char *Clientes::getApellido() {
-    char *p= new char[20];
-    strcpy(p, apellido);
-    return p;
-}
-
-int Clientes::getDni() {
-    return dni;
-}
 
 int Clientes::getAnioingreso() {
     return anioingreso;
