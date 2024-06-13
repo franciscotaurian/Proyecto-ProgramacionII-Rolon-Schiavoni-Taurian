@@ -20,6 +20,7 @@ class Clientes{
     Tarjeta tipotarjeta;
     int caja_pesos;
     int caja_dolar;
+    int num_transacciones;
 
     public:
     Clientes();
@@ -44,7 +45,7 @@ class Clientes{
         string getTipocliente();
         Transacciones *gettransacciones();
         void consultar_saldo();
-        void hacer_transaccion();
+        void agregarTransaccion(Transacciones*);
         void pedir_baja();
 };
 

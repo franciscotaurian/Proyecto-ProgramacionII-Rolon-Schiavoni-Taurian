@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+#include <fstream>
 #include "transacciones.h"
 using namespace std;
 
@@ -15,6 +17,7 @@ Transacciones::Transacciones(int nt, int t, int d, int m, int a){
  anio= a;
 
 }
+
 
 
 void Transacciones::setNumtrans(int nt) {

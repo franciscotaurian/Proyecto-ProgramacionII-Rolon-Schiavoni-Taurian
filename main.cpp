@@ -30,9 +30,11 @@ void menuEmpleado()
     cout << "2) Eliminar Cliente" << endl;
     cout << "3) Mostrar Datos de Cliente" << endl;
     cout << "4) Generar Archivo de clientes" << endl;
+    cout << "5) Ver todas las transacciones de los clientes" <<endl;
     cout << "0) Salir"<<endl;
     cout << "Ingrese un opcion" << endl;
 }
+
 
 void menuCliente()
 {
@@ -40,7 +42,6 @@ void menuCliente()
     cout << "1) Ver mis datos" << endl;
     cout << "2) Ver dinero en cuenta" << endl;
     cout << "3) Realizar una transaccion" << endl;
-    cout<< "4) Cambiar a empleado"<<endl;
     cout<< "0) Salir"<<endl;
     cout << "Ingrese un opcion" << endl;
 }
@@ -136,6 +137,9 @@ void generarLista(){
     banco1.muestraListado();
 }
 
+void transaccionestodas(){
+    banco1.muestraTransacciones();
+}
 
 
 void hacerTransaccion(Clientes* cliente)
@@ -147,9 +151,26 @@ void hacerTransaccion(Clientes* cliente)
 
     int tipo_transaccion, moneda;
     float monto;
+    int dia, mes, anio;
+    cout << "Ingrese el día de la transacción: ";
+    cin >> dia;
+
+    cout << "Ingrese el mes de la transacción: ";
+    cin >> mes;
+
+    cout << "Ingrese el año de la transacción: ";
+    cin >> anio;
+
+    
+    Transacciones nuevaTransaccion;
+    nuevaTransaccion.setDia(dia);
+    nuevaTransaccion.setMes(mes);
+    nuevaTransaccion.setAnio(anio);
+
 
     cout << "Ingrese (1) para hacer una extracción y (2) para hacer un deposito: ";
     cin >> tipo_transaccion;
+    
 
     cout << "Seleccione la moneda: " << endl;
     cout << "1) Pesos" << endl;
@@ -218,10 +239,6 @@ void verDatos(Clientes* cli) {
             cout << "Tipo de Cliente: " << cli->getTipocliente() << endl;
           
     }
-    
-
-
-
 /*
 void validarAntiguedad() {
     int antiguedad = 2024 - anioingreso;
@@ -253,95 +270,91 @@ Clientes* clienteExiste(int _dni)
             return &c[i]; // Devolver el puntero al cliente si se encuentra
         }
     }
-    return nullptr; // si no se encuentra
+    return nullptr; 
 }
 
-int main()
-{
+int main() {
     int tipoUsuario;
-    cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado): ";
-    cin >> tipoUsuario;
 
-    if (tipoUsuario == 1)
-    {
-      int dni;
-      cout << "Ingrese su DNI: ";
-      cin >> dni;
+    do {
+        char nombreB[20], direccionB[20];
+        cout << "Ingrese el nombre del banco: ";
+        cin.ignore();
+        cin.getline(nombreB, 20);
+        cout << "Ingrese la dirección del banco: ";
+        cin.getline(direccionB, 20);
+        cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
+        cin >> tipoUsuario;
 
-        Clientes* clienteActual = clienteExiste(dni);
-        if (clienteActual != nullptr) 
-        { 
-            int opcion;
+        if (tipoUsuario == 1) {
+            int dni;
+            cout << "Ingrese su DNI: ";
+            cin >> dni;
+
+            Clientes* clienteActual = clienteExiste(dni);
+            if (clienteActual != nullptr) {
+                int opcionCliente;
+                do {
+                    menuCliente();
+                    cin >> opcionCliente;
+                    switch (opcionCliente) {
+                    case 1:
+                        verDatos(clienteActual);
+                        break;
+                    case 2:
+                        cout << "Dinero en cuenta:" << endl;
+                        cout << "Pesos: " << clienteActual->getCaja_pesos() << endl;
+                        cout << "Dólares: " << clienteActual->getCaja_dolar() << endl;
+                        break;
+                    case 3:
+                        hacerTransaccion(clienteActual);
+                        break;
+                    case 0:
+                        cout << "Saliendo del menú cliente..." << endl;
+                        break;
+                    default:
+                        cout << "Opción no válida" << endl;
+                        break;
+                    }
+                } while (opcionCliente != 0 && tipoUsuario == 1); // Permanece en el menú cliente hasta que se elija salir
+            } else {
+                cout << "El cliente no existe." << endl;
+            }
+        } else if (tipoUsuario == 2) {
+    
+
+
+            int opcionEmpleado;
             do {
-                menuCliente();
-                cin >> opcion;
-                switch (opcion) {
+                menuEmpleado();
+                cin >> opcionEmpleado;
+                switch (opcionEmpleado) {
                 case 1:
-                    verDatos(clienteActual); 
+                    AgregarCliente();
                     break;
                 case 2:
-                    cout << "Dinero en cuenta:" << endl;
-                    cout << "Pesos: " << clienteActual->getCaja_pesos() << endl;
-                    cout << "Dólares: " << clienteActual->getCaja_dolar() << endl;
+                    EliminarCliente();
                     break;
                 case 3:
-                    hacerTransaccion(clienteActual); 
+                    mostrarCLiente();
                     break;
                 case 4:
-                    tipoUsuario=2;
+                    generarLista();
+                    break;
+                case 5:
+                    transaccionestodas();
+                case 0:
+                    cout << "Saliendo del menú empleado..." << endl;
                     break;
                 default:
-                    cout << "Opción no válida" << endl;
-                    break;
+                    cout << "Opción no válida." << endl;
                 }
-            } while (opcion != 0 || opcion); 
-        } 
-        else {
-            cout << "El cliente no existe." << endl;
+            } while (opcionEmpleado != 0 && tipoUsuario == 2); 
+        } else if (tipoUsuario != 0) {
+            cout << "Tipo de usuario no válido." << endl;
         }
-    }
+    } while (tipoUsuario != 0);
 
-    else if (tipoUsuario == 2)
-    {
-        
-    char nombreB[20], direccionB[20];
-
-    cout << "Ingrese el nombre del banco: ";
-    cin.ignore();
-    cin.getline(nombreB, 20);
-    cout << "Ingrese la dirección del banco: ";
-    cin.getline(direccionB, 20);
-    
-        int opcionEmpleado;
-        do
-        {
-            menuEmpleado();
-            cin >> opcionEmpleado;
-            switch (opcionEmpleado)
-            {
-            case 1:
-                AgregarCliente();
-                break;
-            case 2:
-                EliminarCliente();
-                break;
-            case 3:
-                mostrarCLiente();
-                break;
-            case 4:
-                generarLista();
-                break;
-            case 0:
-                cout << "Saliendo del menu empleado..." << endl;
-                break;
-            default:
-                cout << "Opcion no valida." << endl;
-            }
-        } while (opcionEmpleado != 0);
-    }
-    else
-    {
-        cout << "Tipo de usuario no valido." << endl;
-    }
+    cout << "Saliendo del programa..." << endl;
+    return 0;
 }
-

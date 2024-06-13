@@ -25,6 +25,7 @@ Clientes::Clientes(int nc, int d, int ai, char nom[], char ap[]){
    strcpy(nombre, nom);
    strcpy(apellido, ap);  
 
+
 }
 
 void Clientes::setNcliente(int ncliente){

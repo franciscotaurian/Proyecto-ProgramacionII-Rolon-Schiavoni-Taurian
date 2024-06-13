@@ -26,6 +26,7 @@ class Transacciones{
     int getDia();
     int getMes();
     int getAnio();
+    void muestraTrasacciones();
 };
 
 #endif

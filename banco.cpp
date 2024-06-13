@@ -83,6 +83,37 @@ void banco::muestraListado()
     }
 }
 
+void banco::muestraTransacciones()
+{
+    ofstream listaTrans;
+    listaTrans.open("C:/Users/cande/Onedrive/Documentos/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listaTrans.txt");
+    
+    if (!listaTrans) {
+        cerr << "Error al abrir el archivo listaTransacciones.txt" << endl;
+        return;
+    }
+
+        listaTrans << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+
+    for (int i = 0; i < nClientes; i++)
+    {
+        listaTrans << "Cliente n: " << listado[i].getNumCliente() << ":" << endl;
+        listaTrans << "Nombre: " << listado[i].gettransacciones() << "." << endl;
+        
+        
+        cout<<""<<endl;
+    }
+    
+    listaTrans.close();
+    
+    if (listaTrans.fail()) {
+        cerr << "Error al cerrar el archivo listadoClientes.txt" << endl;
+    } else {
+        cout << "Archivo generado correctamente." << endl;
+    }
+
+
+}
 
 
 Clientes *banco::getlistado(){
