@@ -161,16 +161,15 @@ void hacerTransaccion(Clientes* cliente)
     cout << "Ingrese el año de la transacción: ";
     cin >> anio;
 
+    cout << "Ingrese (1) para hacer una extracción y (2) para hacer un deposito: ";
+    cin >> tipo_transaccion;
     
     Transacciones nuevaTransaccion;
     nuevaTransaccion.setDia(dia);
     nuevaTransaccion.setMes(mes);
     nuevaTransaccion.setAnio(anio);
+    nuevaTransaccion.setTipo(tipo_transaccion);
 
-
-    cout << "Ingrese (1) para hacer una extracción y (2) para hacer un deposito: ";
-    cin >> tipo_transaccion;
-    
 
     cout << "Seleccione la moneda: " << endl;
     cout << "1) Pesos" << endl;

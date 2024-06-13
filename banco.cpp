@@ -98,7 +98,7 @@ void banco::muestraTransacciones()
     for (int i = 0; i < nClientes; i++)
     {
         listaTrans << "Cliente n: " << listado[i].getNumCliente() << ":" << endl;
-        listaTrans << "Nombre: " << listado[i].gettransacciones() << "." << endl;
+        listaTrans << "Transacciones: " << listado[i].gettransacciones() << "." << endl;
         
         
         cout<<""<<endl;
