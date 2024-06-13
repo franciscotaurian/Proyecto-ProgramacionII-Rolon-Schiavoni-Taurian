@@ -1,5 +1,5 @@
-#ifndef PERSONA_H
-#define PERSONA_H
+#ifndef PERSONA_H // Si no esta definida la clase persona.h
+#define PERSONA_H // Definir la clase persona.h
 
 #include<iostream>
 using namespace std;

@@ -1,5 +1,5 @@
-#ifndef TARJETA_H
-#define TARJETA_H
+#ifndef TARJETA_H // Si no esta definida la clase tarjeta.h
+#define TARJETA_H // Definir la clase tarjeta.h
 
 #include <iostream>
 using namespace std;

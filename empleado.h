@@ -2,9 +2,9 @@
 
 class Empleado:public Persona{
     private:
-    int nEmpleado;
+        int nEmpleado;
     public:
-    Empleado();
-    void setnEmpleado(int);
-    int getnEmpleado();
+        Empleado();
+        void setnEmpleado(int);
+        int getnEmpleado();
 };

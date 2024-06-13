@@ -1,5 +1,5 @@
-#ifndef CLIENTES_H
-#define CLIENTES_H
+#ifndef CLIENTES_H // Si no esta definida la clase clientes.h
+#define CLIENTES_H // Definir la clase clientes.h
 
 #include "persona.h"
 #include <iostream>
@@ -10,19 +10,19 @@ using namespace std;
 class Clientes:public Persona{
 
     private:
-    int numcliente;
-    string tipocliente;
-    int anioingreso;
-    string estado;
-    Transacciones trans_clientes[100];
-    Tarjeta tipotarjeta;
-    int caja_pesos;
-    int caja_dolar;
-    int num_transacciones;
+        int numcliente;
+        string tipocliente;
+        int anioingreso;
+        string estado;
+        Transacciones trans_clientes[100];
+        Tarjeta tipotarjeta;
+        int caja_pesos;
+        int caja_dolar;
+        int num_transacciones;
 
     public:
-    Clientes();
-    Clientes(int, int, int, char[], char[]);
+        Clientes();
+        Clientes(int, int, int, char[], char[]);
         void setNcliente(int);
         void setAnioingreso(int);
         void setCaja_pesos(int);
@@ -41,7 +41,7 @@ class Clientes:public Persona{
         void pedir_baja();
 };
 
-#endif
+#endif // CLIENTES_H
 
 
 

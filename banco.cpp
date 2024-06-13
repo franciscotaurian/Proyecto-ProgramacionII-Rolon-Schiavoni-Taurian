@@ -12,19 +12,19 @@ banco::banco()
 
 banco::banco(char _nombre[], char _direccion[])
 {
-    strcpy(nombre, _nombre);
-    strcpy(direccion, _direccion);
+    strcpy(nombre, _nombre); // Copia el contenido de _nombre en nombre
+    strcpy(direccion, _direccion); // Copia el contenido de _direccion en direccion
     nEmpleado=0;
 }
 
 void banco::setNombre(char name[])
 {
-    strcpy(nombre, name);
+    strcpy(nombre, name); // Copia el contenido de name en nombre
 }
 
 void banco::setDireccion(char adress[])
 {
-    strcpy(direccion, adress);
+    strcpy(direccion, adress); // Copia el contenido de adress en direccion
 }
 
 void banco::incrementarnEmpleados(){
@@ -38,7 +38,7 @@ int banco::getnEmpleado(){
 void banco::ActualizarLista(Clientes nuevalista[]){
     for (int i = 0; i <= nClientes; i++)
     {
-        listado[i]=nuevalista[i];
+        listado[i]=nuevalista[i]; // Copia el contenido de nuevalista en listado
     }
     
 }
@@ -68,6 +68,7 @@ void banco::muestraListado()
     
     if (!listadoClientes) {
         cerr << "Error al abrir el archivo listadoClientes.txt" << endl;
+        // Muestra un mensaje de error si no se puede abrir el archivo
         return;
     }
 
@@ -86,6 +87,7 @@ void banco::muestraListado()
     
     if (listadoClientes.fail()) {
         cerr << "Error al cerrar el archivo listadoClientes.txt" << endl;
+        // Muestra un mensaje de error si no se puede cerrar el archivo
     } else {
         cout << "Archivo generado correctamente." << endl;
     }
@@ -98,6 +100,7 @@ void banco::muestraTransacciones()
     
     if (!listaTrans) {
         cerr << "Error al abrir el archivo listaTransacciones.txt" << endl;
+        // Muestra un mensaje de error si no se puede abrir el archivo
         return;
     }
 
@@ -116,6 +119,7 @@ void banco::muestraTransacciones()
     
     if (listaTrans.fail()) {
         cerr << "Error al cerrar el archivo listadoClientes.txt" << endl;
+        // Muestra un mensaje de error si no se puede abrir el archivo
     } else {
         cout << "Archivo generado correctamente." << endl;
     }
@@ -137,14 +141,14 @@ Clientes *banco::getlistado(){
 void banco::muestraDatos(int posicion)
 {
 
-        cout << "Numero de cliente: " << listado[posicion].getNumCliente()<< endl;
-        cout << "Nombre: " << listado[posicion].getNombre() << endl;
-        cout << "Apellido: " << listado[posicion].getApellido() << endl;
-        cout << "Dni: " << listado[posicion].getDni() << endl;
-        cout << "Tipo de cliente: " << listado[posicion].getTipocliente() << endl;
-        cout << "Estado: " << listado[posicion].getEstado() << endl;
-        cout << "Caja en Pesos: $" << listado[posicion].getCaja_pesos() << endl;
-        cout << "Caja en Dolares: $" << listado[posicion].getCaja_dolar() << endl;
+    cout << "Numero de cliente: " << listado[posicion].getNumCliente()<< endl;
+    cout << "Nombre: " << listado[posicion].getNombre() << endl;
+    cout << "Apellido: " << listado[posicion].getApellido() << endl;
+    cout << "Dni: " << listado[posicion].getDni() << endl;
+    cout << "Tipo de cliente: " << listado[posicion].getTipocliente() << endl;
+    cout << "Estado: " << listado[posicion].getEstado() << endl;
+    cout << "Caja en Pesos: $" << listado[posicion].getCaja_pesos() << endl;
+    cout << "Caja en Dolares: $" << listado[posicion].getCaja_dolar() << endl;
     
 }
 

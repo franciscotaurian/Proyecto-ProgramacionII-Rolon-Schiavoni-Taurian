@@ -9,8 +9,8 @@ Persona::Persona(){
 
 Persona::Persona(char nom[], char ap[],int d){
    dni= d;
-   strcpy(nombre, nom);
-   strcpy(apellido, ap);  
+   strcpy(nombre, nom); // copia el contenido de nom en nombre
+   strcpy(apellido, ap);  // copia el contenido de ap en apellido
 }
 
 void Persona::setNombre(char nom[]) {

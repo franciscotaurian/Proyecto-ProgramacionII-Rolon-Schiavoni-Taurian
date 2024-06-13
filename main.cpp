@@ -15,14 +15,13 @@ bool checkletra(char array[])
 
     for (int i = 0; array[i] != '\0'; i++)
     {
-        if (!isalpha(array[i]) && array[i] != ' ')
+        if (!isalpha(array[i]) && array[i] != ' ') // isalpha verifica si el caracter es una letra
         {
             return false;
         }
     }
     return true;
 }
-
 
 void menuEmpleado()
 {
@@ -71,7 +70,7 @@ void AgregarCliente()
 
     cout << "Ingrese el Dni del cliente" << endl;
     cin >> dni;
-
+    
     if (clienteExistente(dni) == true)
     {
         cout << "El cliente que desea agregar ya existe" << endl;
@@ -275,24 +274,24 @@ Clientes* clienteExiste(int _dni)
 
 int main() {
     int tipoUsuario;
-
-        char nombreB[20], direccionB[20];
-        cout << "Ingrese el nombre del banco: ";
-        cin.ignore();
-        cin.getline(nombreB, 20);
-        cout << "Ingrese la dirección del banco: ";
-        cin.getline(direccionB, 20);
-        cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
-        cin >> tipoUsuario;
+    char nombreB[20], direccionB[20];
+    cout << "Ingrese el nombre del banco: ";
+    cin.ignore();
+    cin.getline(nombreB, 20);
+    cout << "Ingrese la dirección del banco: ";
+    cin.getline(direccionB, 20);
 
     do {
+        cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
+        cin >> tipoUsuario;
+    
         if (tipoUsuario == 1) {
             int dni;
             cout << "Ingrese su DNI: ";
             cin >> dni;
 
             Clientes* clienteActual = clienteExiste(dni);
-            if (clienteActual != nullptr) {
+            if (clienteActual != nullptr) { //nullptr es un puntero nulo
                 int opcionCliente;
                 do {
                     menuCliente();
