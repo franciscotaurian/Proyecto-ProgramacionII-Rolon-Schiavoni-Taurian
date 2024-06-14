@@ -8,9 +8,9 @@ Transacciones::Transacciones() {
 
 }
 
-Transacciones::Transacciones(int nt, int t, int d, int m, int a){
+Transacciones::Transacciones(int nc, int t, int d, int m, int a, int mo){
 
- num_trans = nt;
+ num_cliente = nc;
  tipo= t;
  dia= d;
  mes= m;
@@ -18,10 +18,8 @@ Transacciones::Transacciones(int nt, int t, int d, int m, int a){
 
 }
 
-
-
-void Transacciones::setNumtrans(int nt) {
-    num_trans = nt;
+void Transacciones::setNum_cliente(int nc) {
+    num_cliente = nc;
 }
 
 void Transacciones::setTipo(int t) {
@@ -40,9 +38,12 @@ void Transacciones::setAnio(int a) {
     anio = a;
 }
 
+void Transacciones::setMonto(int mo) {
+    monto = mo;
+}
 
-int Transacciones::getNumtrans() {
-    return num_trans;
+int Transacciones::getNum_cliente() {
+    return num_cliente;
 }
 
 int Transacciones::getTipo() {
@@ -59,4 +60,8 @@ int Transacciones::getMes() {
 
 int Transacciones::getAnio() {
     return anio;
+}
+
+int Transacciones::getMonto() {
+    return monto;
 }

@@ -7,25 +7,29 @@ using namespace std;
 class Transacciones{
     
     private: 
-        int num_trans;
+        //int num_trans;
+        int num_cliente;
         int tipo;
         int dia;
         int mes;
         int anio;
+        int monto;
 
     public:
         Transacciones();
-        Transacciones(int, int, int, int, int);
-        void setNumtrans(int);
+        Transacciones(int, int, int, int, int,int);
+        void setNum_cliente(int);
         void setTipo(int);
         void setDia(int);
         void setMes(int);
         void setAnio(int);
-        int getNumtrans();
+        void setMonto(int);
+        int getNum_cliente();
         int getTipo();
         int getDia();
         int getMes();
         int getAnio();
+        int getMonto();
         void muestraTrasacciones();
 };
 

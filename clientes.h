@@ -14,7 +14,7 @@ class Clientes:public Persona{
         string tipocliente;
         int anioingreso;
         string estado;
-        Transacciones trans_clientes[100];
+        Transacciones transaccion_cliente;
         Tarjeta tipotarjeta;
         int caja_pesos;
         int caja_dolar;
@@ -29,15 +29,17 @@ class Clientes:public Persona{
         void setCaja_dolar(int);
         void setEstado(string);
         void setTipocliente(string);
+        void setTipotarjeta(Tarjeta);
         int getNumCliente();
         int getAnioingreso();
         int getCaja_pesos();
         int getCaja_dolar();
         string getEstado();
         string getTipocliente();
-        Transacciones *gettransacciones();
+        Tarjeta getTipotarjeta();
+        Transacciones gettransacciones();
         void consultar_saldo();
-        void agregarTransaccion(Transacciones*);
+        void agregarTransaccion(Transacciones);
         void pedir_baja();
 };
 

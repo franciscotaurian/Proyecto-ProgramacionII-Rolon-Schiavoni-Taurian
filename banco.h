@@ -8,8 +8,9 @@ class banco {
         char direccion[20];
         int nClientes;
         int nEmpleado;
+        int ntransacciones;
         Clientes listado[100];
-        Transacciones lista[100];
+        Transacciones historial[100];
     public:
         banco();
         banco(char[],char[]);
@@ -26,6 +27,7 @@ class banco {
         Clientes *getlistado();
         void muestraListado ();
         void muestraDatos (int);
+        void agregoTransaccion(Transacciones);
         void altaClientes(Clientes);
         void bajaClientes(int);
 };

@@ -8,6 +8,8 @@ using namespace std;
 banco::banco()
 {
     nEmpleado=0;
+    ntransacciones=0;
+    nClientes=0;
 }
 
 banco::banco(char _nombre[], char _direccion[])
@@ -15,6 +17,8 @@ banco::banco(char _nombre[], char _direccion[])
     strcpy(nombre, _nombre); // Copia el contenido de _nombre en nombre
     strcpy(direccion, _direccion); // Copia el contenido de _direccion en direccion
     nEmpleado=0;
+    ntransacciones=0;
+    nClientes=0;
 }
 
 void banco::setNombre(char name[])
@@ -64,7 +68,7 @@ char *banco::getDireccion()
 void banco::muestraListado()
 {
     ofstream listadoClientes;
-    listadoClientes.open("C:/Users/Francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientes.txt");
+    listadoClientes.open("/home/francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientes.txt");
     
     if (!listadoClientes) {
         cerr << "Error al abrir el archivo listadoClientes.txt" << endl;
@@ -75,6 +79,7 @@ void banco::muestraListado()
     listadoClientes << "-------------LISTADO DE CLIENTES----------" << endl;
     for (int i = 0; i < nClientes; i++)
     {
+        cout<<endl;
         listadoClientes << "Cliente n: " << listado[i].getNumCliente() << ":" << endl;
         listadoClientes << "Nombre: " << listado[i].getNombre() << "." << endl;
         listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
@@ -96,7 +101,7 @@ void banco::muestraListado()
 void banco::muestraTransacciones()
 {
     ofstream listaTrans;
-    listaTrans.open("C:/Users/cande/Onedrive/Documentos/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listaTrans.txt");
+    listaTrans.open("/home/francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listaTrans.txt");
     
     if (!listaTrans) {
         cerr << "Error al abrir el archivo listaTransacciones.txt" << endl;
@@ -108,11 +113,15 @@ void banco::muestraTransacciones()
 
     for (int i = 0; i < nClientes; i++)
     {
-        listaTrans << "Cliente n: " << listado[i].getNumCliente() << ":" << endl;
-        listaTrans << "Transacciones: " << listado[i].gettransacciones() << "." << endl;
-        
-        
+        cout<<endl;
+        listaTrans << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
+        listaTrans << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
+        listaTrans << "Dia: " << historial[i].getDia() << "." << endl;
+        listaTrans << "Mes: " << historial[i].getMes() << "." << endl;
+        listaTrans << "Año: " << historial[i].getAnio() << "." << endl;
+        listaTrans << "Monto: "<< historial[i].getMonto() <<"."<<endl;
         cout<<""<<endl;
+
     }
     
     listaTrans.close();
@@ -155,6 +164,12 @@ void banco::muestraDatos(int posicion)
 void banco::altaClientes(Clientes _cliente){
     listado[nClientes]=_cliente;
     nClientes++;
+}
+
+
+void banco::agregoTransaccion(Transacciones _transaccion){
+    historial[ntransacciones] = _transaccion; 
+    ntransacciones++;
 }
 
 void banco::bajaClientes(int nclient){

@@ -27,6 +27,9 @@ void Clientes::setNcliente(int ncliente){
     numcliente=ncliente;
 }
 
+void Clientes::setTipotarjeta(Tarjeta tarj){
+    tipotarjeta=tarj;
+}
 
 void Clientes::setAnioingreso(int ai) {
     anioingreso = ai;
@@ -73,15 +76,13 @@ string Clientes::getTipocliente() {
     return tipocliente;
 }
 
-Transacciones *Clientes::gettransacciones() {
-    Transacciones* p = new Transacciones[100];
-    for (int i = 0; i < 100; i++) {
-        p[i] = trans_clientes[i];
-    }
-    return p;
+Transacciones Clientes::gettransacciones() {
+    return transaccion_cliente;
 }
 
-
+Tarjeta Clientes::getTipotarjeta(){
+    return tipotarjeta;
+}
 
 void Clientes::consultar_saldo() {
     cout << "Saldo en la caja del cliente " << numcliente << " en pesos: " << caja_pesos << endl;
