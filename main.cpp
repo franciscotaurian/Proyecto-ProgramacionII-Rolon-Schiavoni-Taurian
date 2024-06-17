@@ -225,10 +225,40 @@ void EliminarCliente() // Funcion para dar de baja un cliente
 {
     string checkncliente;
     int nclien;
-    cout << "Ingrese el numero de cliente que quiere dar de baja" << endl;
-    cin >> checkncliente;
+    bool banderacliente = true;
+    do
+    {
+        cout << "Ingrese el numero de cliente que quiere dar de baja" << endl;
+        cin >> checkncliente;
+
+        if (esNumero(checkncliente))
+        {
+            try
+            {
+                nclien = stoi(checkncliente); // Convertir la cadena a entero
+                cout << "Numero válido: " << nclien << endl;
+                banderacliente = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "NUmero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderacliente = false;
+            }
+        }
+        else // Si el año ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderacliente = false;
+        }
+        if (nclien >= banco1.getnClientes())
+        {
+            cout << "El numero de cliente no exite" << endl;
+            banderacliente = false;
+        }
+    } while (banderacliente == false);
 
     banco1.bajaClientes(nclien);
+    cout<<"Cliente dado de baja"<<endl;
 }
 
 void mostrarCliente() // Funcion para mostrar los datos de un cliente
@@ -262,17 +292,18 @@ void mostrarCliente() // Funcion para mostrar los datos de un cliente
             bandera1 = false;
         }
 
+        if (ncliente >= banco1.getnClientes()) // Verificar si el número de cliente ingresado existe
+        {
+            cout << "El numero de cliente no existe" << endl;
+            bandera1 = false;
+        }
+        else // Si el número de cliente ingresado existe, mostrar los datos del cliente
+        {
+            cout << endl;
+            banco1.muestraDatos(ncliente);
+            bandera1 = true;
+        }
     } while (bandera1 == false);
-
-    if (ncliente >= banco1.getnClientes()) // Verificar si el número de cliente ingresado existe
-    {
-        cout << "El numero de cliente no existe" << endl;
-    }
-    else // Si el número de cliente ingresado existe, mostrar los datos del cliente
-    {
-        cout << endl;
-        banco1.muestraDatos(ncliente);
-    }
 }
 
 void generarLista() // Funcion para generar un archivo con los datos de los clientes
@@ -574,6 +605,8 @@ Clientes *clienteExiste(int _dni) // Funcion para verificar si el cliente existe
 int main() // Función principal
 {
     int tipoUsuario;
+    string checktipoUsuario;
+    bool banderatipoUsuario;
     char nombreB[20], direccionB[20];
     cout << "Ingrese el nombre del banco: ";
     cin.ignore();
@@ -583,8 +616,34 @@ int main() // Función principal
 
     do // Menú principal
     {
-        cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
-        cin >> tipoUsuario;
+
+        do
+        {
+
+            cout << "Ingrese el tipo de usuario (1 para Cliente, 2 para Empleado, 0 para salir): ";
+            cin >> checktipoUsuario;
+
+            if (esNumero(checktipoUsuario)) // Verificar si el monto ingresado es un número
+            {
+                try
+                {
+                    tipoUsuario = stoi(checktipoUsuario); // Convertir la cadena a entero
+                    cout << "Numero válido: " << tipoUsuario << endl;
+                    banderatipoUsuario = true;
+                }
+                catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+                {
+                    cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                    banderatipoUsuario = false;
+                }
+            }
+            else // Si el monto ingresado no es un número
+            {
+                cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+                banderatipoUsuario = false;
+            }
+
+        } while (banderatipoUsuario == false);
 
         if (tipoUsuario == 1) // Menú cliente
         {
