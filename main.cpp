@@ -35,6 +35,8 @@ void menuEmpleado()
     cout << "3) Mostrar Datos de Cliente" << endl;
     cout << "4) Generar Archivo de clientes" << endl;
     cout << "5) Generar Archivo de transacciones" << endl;
+    cout << "6) Ver Transacciones por Mes" << endl;
+    cout << "7) Ver Transacciones por Anio" << endl;
     cout << "0) Salir" << endl;
     cout << "Ingrese un opcion" << endl;
     cout << "*************************" << endl;
@@ -53,6 +55,96 @@ void menuCliente()
     cout << "Ingrese un opcion" << endl;
     cout << "*************************" << endl;
     cout << endl;
+}
+
+
+void transaccionMes(){
+
+    int mes;
+    bool banderatransaccion;
+    string checkmes;
+    do // Ingresar mes de la transacción
+    { 
+        cout << "Ingrese el mes de la transacción: ";
+        cin >> checkmes;
+
+        if (esNumero(checkmes)) // Verificar si el mes ingresado es un número
+        {
+            try
+            {
+                mes = stoi(checkmes); // Convertir la cadena a entero
+                cout << "Numero válido: " << mes << endl;
+                banco1.transaccionMes(mes);
+                banderatransaccion = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderatransaccion = false;
+            }
+        }
+        else // Si el mes ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderatransaccion = false;
+        }
+        if (mes > 12 || mes < 1)
+        { // Verificar si el mes ingresado está dentro del rango del mes posible del año
+            cout << "Debe ingresar un mes valido" << endl;
+            banderatransaccion = false;
+        }
+
+    } while (banderatransaccion == false);
+
+    banderatransaccion = true;
+    
+
+}
+
+void transaccionAnio(){
+    int anio;
+    bool banderatransaccion;
+    string checkanio;
+        do // Ingresar año de la transacción
+    {
+        cout << "Ingrese el año de la transacción: ";
+        cin >> checkanio;
+
+        if (esNumero(checkanio)) // Verificar si el año ingresado es un número
+        {
+            try
+            {
+                anio = stoi(checkanio); // Convertir la cadena a entero
+                cout << "Numero válido: " << anio << endl;
+                banco1.transaccionAnio(anio);
+                banderatransaccion = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderatransaccion = false;
+            }
+        }
+        else // Si el año ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderatransaccion = false;
+        }
+
+        if (anio > 2024 || anio < 0)
+        { // Verificar si el año ingresado es válido
+            cout << "Debe ingresar un Año valido" << endl;
+            banderatransaccion = false;
+        }
+        else
+        {
+            banderatransaccion = true;
+        }
+
+    } while (banderatransaccion == false);
+
+    
+    
 }
 
 bool esNumero(const string &str) // Funcion para verificar si el DNI ingresado es un número
@@ -968,6 +1060,10 @@ int main() // Función principal
                     break;
                 case 5:
                     transaccionestodas();
+                case 6: 
+                    transaccionMes();
+                case 7: 
+                    transaccionAnio();
                 case 0:
                     cout << "Saliendo del menú empleado..." << endl;
                     break;

@@ -145,6 +145,41 @@ void banco::muestraTransacciones()
     }
 }
 
+
+void banco::transaccionAnio(int anio){
+    cout << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+
+    for (int i = 0; i < ntransacciones; i++) {
+        if (historial[i].getAnio() == anio) {
+            cout << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
+            cout << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
+            cout << "Tipo de moneda: " << historial[i].getMoneda() << "." << endl;
+            cout << "Dia: " << historial[i].getDia() << "." << endl;
+            cout << "Mes: " << historial[i].getMes() << "." << endl;
+            cout << "Año: " << historial[i].getAnio() << "." << endl;
+            cout << "Monto: " << historial[i].getMonto() << "." << endl;
+            cout << "--------------------------------------" << endl;
+        }
+    }
+}
+
+void banco::transaccionMes(int mes) {
+    cout << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+
+    for (int i = 0; i < ntransacciones; i++) {
+        if (historial[i].getMes() == mes) {
+            cout << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
+            cout << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
+            cout << "Tipo de moneda: " << historial[i].getMoneda() << "." << endl;
+            cout << "Dia: " << historial[i].getDia() << "." << endl;
+            cout << "Mes: " << historial[i].getMes() << "." << endl;
+            cout << "Año: " << historial[i].getAnio() << "." << endl;
+            cout << "Monto: " << historial[i].getMonto() << "." << endl;
+            cout << "--------------------------------------" << endl;
+        }
+    }
+}
+
 Clientes *banco::getlistado()
 {
     Clientes *p = new Clientes[100];
