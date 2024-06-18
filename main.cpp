@@ -28,12 +28,13 @@ bool checkletra(char array[]) // Funcion para verificar si el nombre y apellido 
 
 void menuEmpleado()
 {
+    cout << endl;
     cout << "**********MENU**********" << endl;
     cout << "1) Agregar Cliente" << endl;
     cout << "2) Eliminar Cliente" << endl;
     cout << "3) Mostrar Datos de Cliente" << endl;
     cout << "4) Generar Archivo de clientes" << endl;
-    cout << "5) Ver todas las transacciones de los clientes" << endl;
+    cout << "5) Generar Archivo de transacciones" << endl;
     cout << "0) Salir" << endl;
     cout << "Ingrese un opcion" << endl;
     cout << "*************************" << endl;
@@ -42,6 +43,7 @@ void menuEmpleado()
 
 void menuCliente()
 {
+    cout << endl;
     cout << "**********MENU**********" << endl;
     cout << "1) Ver mis datos" << endl;
     cout << "2) Ver dinero en cuenta" << endl;
@@ -92,6 +94,7 @@ void AgregarCliente() // Funcion para agregar un cliente
     // Ingreso de DNI
     do
     {
+        cout << endl;
         cout << "Ingrese el Dni del cliente" << endl;
         cin >> checkdni;
         cout << endl;
@@ -103,17 +106,20 @@ void AgregarCliente() // Funcion para agregar un cliente
             {
                 dni = stoi(checkdni); // Convertir la cadena a entero
                 cout << "DNI válido: " << dni << endl;
+                cout << endl;
                 bandera = true;
             }
             catch (const out_of_range &e)
             {
                 cout << "DNI inválido. El número está fuera del rango permitido para un entero." << endl;
+                cout << endl;
                 bandera = false;
             }
         }
         else
         {
             cout << "DNI inválido. Por favor, ingrese solo números." << endl;
+            cout << endl;
             bandera = false;
         }
 
@@ -150,8 +156,10 @@ void AgregarCliente() // Funcion para agregar un cliente
             // Verificar si el apellido ingresado contiene solo letras
             if (checkletra(apellido) == false)
             {
+                cout << endl;
                 cout << "El apellido puede contener solo letras" << endl;
                 cout << "Ingrese nuevamente el apellido" << endl;
+                cout << endl;
                 cin.getline(apellido, 20, '\n');
             };
         } while (checkletra(nombre) == false);
@@ -160,7 +168,7 @@ void AgregarCliente() // Funcion para agregar un cliente
         do
         {
             cout << endl;
-            cout << "Ingrese el anio de ingreso" << endl;
+            cout << "Ingrese el año de ingreso" << endl;
             cin >> checkanio;
 
             // Verificar si el año ingresado es un número
@@ -169,6 +177,7 @@ void AgregarCliente() // Funcion para agregar un cliente
                 try
                 {
                     anioingreso = stoi(checkanio); // Convertir la cadena a entero
+                    cout << endl;
                     cout << "Año válido: " << anioingreso << endl;
                     bandera = true;
                 }
@@ -181,6 +190,11 @@ void AgregarCliente() // Funcion para agregar un cliente
             else // Si el año ingresado no es un número
             {
                 cout << "Año inválido. Por favor, ingrese solo números." << endl;
+                bandera = false;
+            }
+            if (anioingreso > 2024 || anioingreso < 0)
+            { // Verificar si el año ingresado es válido
+                cout << "Debe ingresar un Año valido" << endl;
                 bandera = false;
             }
         } while (bandera == false);
@@ -245,7 +259,7 @@ void EliminarCliente() // Funcion para dar de baja un cliente
                 banderacliente = false;
             }
         }
-        else // Si el año ingresado no es un número
+        else // Si el valor ingresado no es un número
         {
             cout << "Numero inválido. Por favor, ingrese solo números." << endl;
             banderacliente = false;
@@ -258,7 +272,7 @@ void EliminarCliente() // Funcion para dar de baja un cliente
     } while (banderacliente == false);
 
     banco1.bajaClientes(nclien);
-    cout<<"Cliente dado de baja"<<endl;
+    cout << "Cliente dado de baja" << endl;
 }
 
 void mostrarCliente() // Funcion para mostrar los datos de un cliente
@@ -311,7 +325,7 @@ void generarLista() // Funcion para generar un archivo con los datos de los clie
     banco1.muestraListado();
 }
 
-void transaccionestodas() // Funcion para mostrar todas las transacciones de los clientes
+void transaccionestodas() // Funcion para generar archivo con todas las transacciones de los clientes
 {
     banco1.muestraTransacciones();
 }
@@ -329,8 +343,9 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
     float monto;
     int dia, mes, anio;
     bool banderatransaccion;
-    string checkdia, checkmes, checkanio, checktipo, checkmonto;
-    do
+    string checkdia, checkmes, checkanio, checktipo, checkmonto, checkmoneda;
+
+    do // Ingresar dia de la transacción
     {
         cout << "Ingrese el día de la transacción: ";
         cin >> checkdia;
@@ -354,13 +369,18 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
             cout << "Numero inválido. Por favor, ingrese solo números." << endl;
             banderatransaccion = false;
         }
+        if (dia > 31 || dia < 1)
+        { // Verificar si el dia ingresado está dentro del rango del mes
+            cout << "Debe ingresar un dia valido" << endl;
+            banderatransaccion = false;
+        }
 
     } while (banderatransaccion == false);
 
     banderatransaccion = true;
 
-    do
-    {
+    do // Ingresar mes de la transacción
+    { 
         cout << "Ingrese el mes de la transacción: ";
         cin >> checkmes;
 
@@ -383,12 +403,17 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
             cout << "Numero inválido. Por favor, ingrese solo números." << endl;
             banderatransaccion = false;
         }
+        if (mes > 12 || mes < 1)
+        { // Verificar si el mes ingresado está dentro del rango del mes posible del año
+            cout << "Debe ingresar un mes valido" << endl;
+            banderatransaccion = false;
+        }
 
     } while (banderatransaccion == false);
 
     banderatransaccion = true;
 
-    do
+    do // Ingresar año de la transacción
     {
         cout << "Ingrese el año de la transacción: ";
         cin >> checkanio;
@@ -411,6 +436,16 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
         {
             cout << "Numero inválido. Por favor, ingrese solo números." << endl;
             banderatransaccion = false;
+        }
+
+        if (anio > 2024 || anio < 0)
+        { // Verificar si el año ingresado es válido
+            cout << "Debe ingresar un Año valido" << endl;
+            banderatransaccion = false;
+        }
+        else
+        {
+            banderatransaccion = true;
         }
 
     } while (banderatransaccion == false);
@@ -442,7 +477,7 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
             banderatransaccion = false;
         }
 
-        if (tipo_transaccion != 1 || tipo_transaccion != 2)
+        if (tipo_transaccion != 1 && tipo_transaccion != 2)
         {
             cout << "Numero de opcion invalido" << endl;
             banderatransaccion = false;
@@ -460,11 +495,54 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
     nuevaTransaccion.setAnio(anio);
     nuevaTransaccion.setTipo(tipo_transaccion);
 
-    // Ingresar el monto y la moneda de la transacción
-    cout << "Seleccione la moneda: " << endl;
-    cout << "1) Pesos" << endl;
-    cout << "2) Dólares" << endl;
-    cin >> moneda;
+    do
+    {
+        // Ingresar el monto y la moneda de la transacción
+        cout << endl;
+        cout << "Seleccione la moneda: " << endl;
+        cout << "1) Pesos" << endl;
+        cout << "2) Dólares" << endl;
+        cin >> checkmoneda;
+        cout << endl;
+
+        // validacion moneda
+        if (esNumero(checkmoneda)) // Verificar si valor ingresado es un número
+        {
+            try
+            {
+                moneda = stoi(checkmoneda); // Convertir la cadena a entero
+                cout << "El numero ingresado es válido" << endl;
+                banderatransaccion = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderatransaccion = false;
+            }
+        }
+        else // Si el monto ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderatransaccion = false;
+        }
+
+        if (moneda != 1 && moneda != 2)
+        {
+            cout << "Valor invalido, ingrese una moneda valida" << endl;
+            banderatransaccion = false;
+        }
+        if (moneda == 1)
+        {
+            cout << "***Ha seleccionado pesos***" << endl;
+        }
+        if (moneda == 2)
+        {
+            cout << "***Ha seleccionado dolares***" << endl;
+        }
+        // fin validacion moneda
+    } while (banderatransaccion == false);
+
+    banderatransaccion = true;
 
     do
     {
@@ -489,6 +567,12 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
         else // Si el monto ingresado no es un número
         {
             cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderatransaccion = false;
+        }
+
+        if (monto < 0)
+        {
+            cout << "Monto invalido, ingrese un monto valido" << endl;
             banderatransaccion = false;
         }
 
@@ -542,9 +626,9 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
     }
     // Agregar la transacción al cliente
     nuevaTransaccion.setMonto(monto);
+    nuevaTransaccion.setMoneda(moneda);
     banco1.agregoTransaccion(nuevaTransaccion);
 }
-
 void verDatos(Clientes *cli)
 {
 
@@ -605,7 +689,7 @@ Clientes *clienteExiste(int _dni) // Funcion para verificar si el cliente existe
 int main() // Función principal
 {
     int tipoUsuario;
-    string checktipoUsuario;
+    string checktipoUsuario, checkDni;
     bool banderatipoUsuario;
     char nombreB[20], direccionB[20];
     cout << "Ingrese el nombre del banco: ";
@@ -682,11 +766,39 @@ int main() // Función principal
             Clientes *clienteActual = clienteExiste(dni); // Crear un puntero al cliente si existe
             if (clienteActual != nullptr)
             { // nullptr es un puntero nulo
+
                 int opcionCliente;
+                string checkoptionCliente;
+                bool banderaoptioncliente;
                 do
                 {
-                    menuCliente();
-                    cin >> opcionCliente;
+                    do
+                    {
+                        menuCliente();
+                        cin >> checkoptionCliente;
+
+                        if (esNumero(checkoptionCliente)) // Verificar si el DNI ingresado es un número
+                        {
+                            try
+                            {
+                                opcionCliente = stoi(checkoptionCliente); // Convertir la cadena a entero
+                                cout << "Numero válido: " << opcionCliente << endl;
+                                banderaoptioncliente = true;
+                            }
+                            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+                            {
+                                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                                banderaoptioncliente = false;
+                            }
+                        }
+                        else
+                        {
+                            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+                            banderaoptioncliente = false;
+                        }
+
+                    } while (banderaoptioncliente == false);
+
                     switch (opcionCliente)
                     {
                     case 1: // Ver datos del cliente
@@ -724,16 +836,78 @@ int main() // Función principal
             {
                 char ne[20], ae[20];
                 int dnie;
+                bool banderanombre = true;
                 Empleado e1;
+
                 cout << "Ingrese el Nombre del empleado" << endl;
                 cin.ignore();
                 cin.getline(ne, 20, '\n');
+                // Verificar si el nombre ingresado contiene solo letras
+                do
+                {
+                    if (checkletra(ne) == false)
+                    {
+                        banderanombre = false;
+                        cout << "El nombre puede contener solo letras" << endl;
+                        cout << "Ingrese nuevamente el nombre" << endl;
+                        cin.getline(ne, 20, '\n');
+                    }
+                    else
+                    {
+                        banderanombre = true;
+                    }
+
+                } while (banderanombre == false);
+                // Fin validacion nombre
+
                 cout << "Ingrese el apellido del empleado" << endl;
                 cin.getline(ae, 20, '\n');
-                cout << "Ingrese el Dni del empleado" << endl;
-                cin >> dnie;
+                banderanombre = true;
+                // Verificar si el apellido ingresado contiene solo letras
+                do
+                {
+                    if (checkletra(ae) == false)
+                    {
+                        banderanombre = false;
+                        cout << "El apellido puede contener solo letras" << endl;
+                        cout << "Ingrese nuevamente el apellido" << endl;
+                        cin.getline(ae, 20, '\n');
+                    }
+                    else
+                    {
+                        banderanombre = true;
+                    }
+                } while (banderanombre == false);
+                // Fin validacion apellido
 
-                Empleado empleado1;
+                do
+                {
+                    cout << "Ingrese el Dni del empleado" << endl;
+                    cin >> checkDni;
+                    // Verificar si el DNI ingresado es un número
+                    if (esNumero(checkDni)) // Verificar si el DNI ingresado es un número
+                    {
+                        try
+                        {
+                            dnie = stoi(checkDni); // Convertir la cadena a entero
+                            cout << "Numero válido: " << dnie << endl;
+                            banderanombre = true;
+                        }
+                        catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+                        {
+                            cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                            banderanombre = false;
+                        }
+                    }
+                    else
+                    {
+                        cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+                        banderanombre = false;
+                    }
+                } while (banderanombre == false);
+                // Fin validacion DNI
+
+                Empleado empleado1; // Crear un empleado
 
                 // Crear el empleado con los datos ingresados
                 empleado1.setNombre(ne);
@@ -746,10 +920,38 @@ int main() // Función principal
             }
 
             int opcionEmpleado;
+            string checkoptionempleado;
+            bool banderaopcionE;
             do
             {
-                menuEmpleado();
-                cin >> opcionEmpleado;
+
+                do
+                {
+                    menuEmpleado();
+                    cin >> checkoptionempleado;
+
+                    if (esNumero(checkoptionempleado)) // Verificar si el DNI ingresado es un número
+                    {
+                        try
+                        {
+                            opcionEmpleado = stoi(checkoptionempleado); // Convertir la cadena a entero
+                            cout << "Numero válido: " << opcionEmpleado << endl;
+                            banderaopcionE = true;
+                        }
+                        catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+                        {
+                            cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                            banderaopcionE = false;
+                        }
+                    }
+                    else
+                    {
+                        cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+                        banderaopcionE = false;
+                    }
+
+                } while (banderaopcionE == false);
+
                 switch (opcionEmpleado)
                 {
                 case 1:

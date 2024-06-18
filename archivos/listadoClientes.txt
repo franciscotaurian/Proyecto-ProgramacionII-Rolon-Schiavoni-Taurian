@@ -1,16 +1,8 @@
 -------------LISTADO DE CLIENTES----------
+
 Cliente n: 0:
-Nombre: Francisco.
-Apellido: Taurian.
+Nombre: asda.
+Apellido: asdasd.
 Dni: 46068014.
-Tipo de cliente: Plata.
-Cliente n: 1:
-Nombre: Candelaria.
-Apellido: Rolon.
-Dni: 45833247.
-Tipo de cliente: Oro.
-Cliente n: 2:
-Nombre: Santino.
-Apellido: Schiavoni.
-Dni: 45346535.
 Tipo de cliente: Platino.
+------------------------------

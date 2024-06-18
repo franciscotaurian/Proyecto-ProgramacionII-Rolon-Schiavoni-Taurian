@@ -14,6 +14,7 @@ class Transacciones{
         int mes;
         int anio;
         int monto;
+        string moneda;
 
     public:
         Transacciones();
@@ -24,13 +25,15 @@ class Transacciones{
         void setMes(int);
         void setAnio(int);
         void setMonto(int);
+        void setMoneda(int);
         int getNum_cliente();
         int getTipo();
         int getDia();
         int getMes();
         int getAnio();
         int getMonto();
-        void muestraTrasacciones();
+        string getMoneda();
+
 };
 
 #endif
