@@ -18,7 +18,7 @@ class Transacciones{
 
     public:
         Transacciones();
-        Transacciones(int, int, int, int, int,int);
+        Transacciones(int, int, int, int, int);
         void setNum_cliente(int);
         void setTipo(int);
         void setDia(int);

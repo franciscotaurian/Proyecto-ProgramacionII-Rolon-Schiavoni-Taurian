@@ -89,6 +89,8 @@ void banco::muestraListado()
         listadoClientes << "Apellido: " << listado[i].getApellido() << "." << endl;
         listadoClientes << "Dni: " << listado[i].getDni() << "." << endl;
         listadoClientes << "Tipo de cliente: " << listado[i].getTipocliente() << "." << endl;
+        listadoClientes << "Caja en pesos: "<<listado[i].getCaja_pesos() << "."<<endl;
+        listadoClientes << "Caja en dolares: "<<listado[i].getCaja_dolar() << "."<<endl;
         listadoClientes << "------------------------------" << endl;
     }
 
@@ -223,9 +225,6 @@ void banco::transaccionCliente(int numdoc)
     }
 }
 
-
-
-
 Clientes *banco::getlistado()
 {
     Clientes *p = new Clientes[100];
@@ -264,4 +263,7 @@ void banco::agregoTransaccion(Transacciones _transaccion)
 void banco::bajaClientes(int nclient)
 {
     listado[nclient].setEstado("Baja");
+}
+void banco::sobreescbirCliente(int nc,Clientes sob){
+    listado[nc]=sob;
 }

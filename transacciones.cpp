@@ -8,7 +8,7 @@ Transacciones::Transacciones()
 {
 }
 
-Transacciones::Transacciones(int nc, int t, int d, int m, int a, int mo)
+Transacciones::Transacciones(int nc, int t, int d, int m, int a)
 {
 
     num_cliente = nc;

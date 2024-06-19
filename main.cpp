@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
+#include <fstream>
+#include <sstream>
 #include "banco.h"
 #include "tarjeta.h"
 #include "clientes.h"
@@ -12,6 +14,157 @@ banco banco1;
 Tarjeta nula("Nula", 0);
 Tarjeta credix("Credix", 250000);
 Tarjeta premium("Platinum", 500000);
+
+void leerArchivoTransacciones() // Funcion para leer el archivo de transacciones y cargarlas al banco, aunque cerremos el programa, las transacciones se mantendran
+{
+    ifstream archivoTransacciones("/home/francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listaTrans.txt");
+
+    if (!archivoTransacciones.is_open())
+    {
+        cout << "No se pudo abrir el archivo de transacciones." << endl;
+        return;
+    }
+
+    string line;
+    while (getline(archivoTransacciones, line))
+    {
+        if (line.find("Dni del cliente:") != string::npos) // Verificar si la línea contiene el DNI del cliente
+        {
+            // Nueva entrada de transacción
+            int dni;
+            int tipo;
+            int moneda;
+            string monedatipo;
+            int dia, mes, anio;
+            int monto;
+
+            // Leer el dni del cliente
+            istringstream iss(line);
+            string temp;
+            iss >> temp >> temp >> temp >> dni;
+
+            // Leer tipo de transacción
+            getline(archivoTransacciones, line);
+            tipo = stoi(line.substr(line.find(":") + 2));
+
+            // Leer tipo de moneda
+            getline(archivoTransacciones, line);
+            monedatipo = line.substr(line.find(":") + 2);
+            if (monedatipo == "Pesos")
+            {
+                moneda = 1;
+            }
+            else
+            {
+                moneda = 2;
+            }
+
+            // Leer día
+            getline(archivoTransacciones, line);
+            dia = stoi(line.substr(line.find(":") + 2));
+
+            // Leer mes
+            getline(archivoTransacciones, line);
+            mes = stoi(line.substr(line.find(":") + 2));
+
+            // Leer año
+            getline(archivoTransacciones, line);
+            anio = stoi(line.substr(line.find(":") + 2));
+
+            // Leer monto
+            getline(archivoTransacciones, line);
+            monto = stoi(line.substr(line.find(":") + 2));
+
+            // Crear y configurar transacción
+            Transacciones transaccion(dni, tipo, dia, mes, anio);
+            transaccion.setMonto(monto);
+            transaccion.setMoneda(moneda);
+            transaccion.setNum_cliente(dni);
+            // Agregar la transacción al banco
+            banco1.agregoTransaccion(transaccion);
+
+            // Saltar la línea de separación
+            getline(archivoTransacciones, line);
+        }
+    }
+
+    archivoTransacciones.close();
+    cout << "Transacciones cargadas correctamente." << endl;
+}
+
+void leerArchivoClientes() // Funcion para leer el archivo de clientes y cargarlos al banco, aunque cerremos el programa, los clientes se mantendran
+{
+    ifstream archivoClientes("/home/francisco/Desktop/Proyecto-ProgramacionII-Rolon-Schiavoni-Taurian/archivos/listadoClientes.txt");
+
+    if (!archivoClientes.is_open())
+    {
+        cout << "No se pudo abrir el archivo de clientes." << endl;
+        return;
+    }
+
+    string line;
+    while (getline(archivoClientes, line))
+    {
+        if (line.find("Cliente n:") != string::npos)
+        {
+            // Nueva entrada de cliente
+            int numcliente;
+            string nombre, apellido, tipoCliente;
+            int dni, cajaPesos, cajaDolares;
+
+            // Leer el número de cliente
+            istringstream iss(line); // istringstream es un flujo de datos que se utiliza para operaciones de entrada en cadenas
+            string temp;
+            iss >> temp >> temp >> numcliente; // iss permite la manipulación de strings como flujos de datos, similar a cin
+
+            // Leer nombre
+            getline(archivoClientes, line);
+            nombre = line.substr(line.find(":") + 2);
+            nombre.pop_back(); // Remove the trailing period
+
+            // Leer apellido
+            getline(archivoClientes, line);
+            apellido = line.substr(line.find(":") + 2);
+            apellido.pop_back(); // Remove the trailing period
+
+            // Leer dni
+            getline(archivoClientes, line);
+            dni = stoi(line.substr(line.find(":") + 2));
+
+            // Leer tipo de cliente
+            getline(archivoClientes, line);
+            tipoCliente = line.substr(line.find(":") + 2);
+            tipoCliente.pop_back(); // Remove the trailing period
+
+            // Leer caja en pesos
+            getline(archivoClientes, line);
+            cajaPesos = stoi(line.substr(line.find(":") + 2));
+
+            // Leer caja en dolares
+            getline(archivoClientes, line);
+            cajaDolares = stoi(line.substr(line.find(":") + 2));
+
+            // Crear y configurar cliente
+            Clientes cliente;
+            cliente.setNcliente(numcliente);
+            cliente.setNombre(const_cast<char *>(nombre.c_str()));
+            cliente.setApellido(const_cast<char *>(apellido.c_str()));
+            cliente.setDni(dni);
+            cliente.setTipocliente(tipoCliente);
+            cliente.setCaja_pesos(cajaPesos);
+            cliente.setCaja_dolar(cajaDolares);
+
+            // Agregar el cliente al banco
+            banco1.altaClientes(cliente);
+
+            // Saltar la línea de separación
+            getline(archivoClientes, line);
+        }
+    }
+
+    archivoClientes.close();
+    cout << "Clientes cargados correctamente." << endl;
+}
 
 bool checkletra(char array[]) // Funcion para verificar si el nombre y apellido contienen solo letras
 {
@@ -37,7 +190,7 @@ void menuEmpleado()
     cout << "4) Generar Archivo de clientes" << endl;
     cout << "5) Generar Archivo de transacciones" << endl;
     cout << "6) Ver Transacciones por Mes" << endl;
-    cout << "7) Ver Transacciones por Anio" << endl;
+    cout << "7) Ver Transacciones por Año" << endl;
     cout << "0) Salir" << endl;
     cout << "Ingrese un opcion" << endl;
     cout << "*************************" << endl;
@@ -69,13 +222,13 @@ bool esNumero(const string &str) // Funcion para verificar si el DNI ingresado e
     return true;
 }
 
-void transaccionxCliente(int dni2)
+void transaccionxCliente(int dni2) // Funcion para mostrar las transacciones de un cliente
 {
 
     banco1.transaccionCliente(dni2);
 }
 
-void transaccionesMes()
+void transaccionesMes() // Funcion para mostrar las transacciones de un mes
 {
 
     int mes1;
@@ -117,7 +270,7 @@ void transaccionesMes()
     banderames = true;
 }
 
-void transaccionesAnio()
+void transaccionesAnio() // Funcion para mostrar las transacciones de un año
 {
     int anio;
     bool banderaAnio = true;
@@ -182,7 +335,7 @@ void AgregarCliente() // Funcion para agregar un cliente
 {
     int dni, anioingreso;
     string tipocliente;
-    //int limiteCredito;
+    // int limiteCredito;
     int cantClientes = banco1.getnClientes();
     char nombre[20], apellido[20];
     bool bandera = true;
@@ -302,17 +455,17 @@ void AgregarCliente() // Funcion para agregar un cliente
         if (antiguedad < 1)
         {
             tipocliente = "Plata";
-            //limiteCredito = 0;
+            // limiteCredito = 0;
         }
         else if (antiguedad >= 1 && antiguedad < 5)
         {
             tipocliente = "Oro";
-            //limiteCredito = 250000;
+            // limiteCredito = 250000;
         }
         else if (antiguedad >= 6)
         {
             tipocliente = "Platino";
-            //limiteCredito = 500000;
+            // limiteCredito = 500000;
         }
 
         // Crear el cliente
@@ -408,13 +561,8 @@ void mostrarCliente() // Funcion para mostrar los datos de un cliente
             cout << "El numero de cliente no existe" << endl;
             bandera1 = false;
         }
-        else // Si el número de cliente ingresado existe, mostrar los datos del cliente
-        {
-            cout << endl;
-            banco1.muestraDatos(ncliente);
-            bandera1 = true;
-        }
     } while (bandera1 == false);
+    banco1.muestraDatos(ncliente);
 }
 
 void generarLista() // Funcion para generar un archivo con los datos de los clientes
@@ -749,6 +897,10 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
         cout << "Opcion no valida." << endl;
         break;
     }
+
+    int nclient;
+    nclient = cliente->getNumCliente();
+    banco1.sobreescbirCliente(nclient, *cliente);
 }
 
 void verDatos(Clientes *cli)
@@ -809,9 +961,11 @@ Clientes *clienteExiste(int _dni) // Funcion para verificar si el cliente existe
 
 int main() // Función principal
 {
+
     int tipoUsuario;
     string checktipoUsuario, checkDni;
     bool banderatipoUsuario;
+    int contador = 0;
     char nombreB[20], direccionB[20];
     cout << "Ingrese el nombre del banco: ";
     cin.ignore();
@@ -819,8 +973,12 @@ int main() // Función principal
     cout << "Ingrese la dirección del banco: ";
     cin.getline(direccionB, 20);
 
+    leerArchivoClientes();
+    leerArchivoTransacciones();
+    contador++;
     do // Menú principal
     {
+
         do
         {
 

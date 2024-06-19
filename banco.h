@@ -33,4 +33,5 @@ class banco {
         void bajaClientes(int);
         void transaccionMes(int);
         void transaccionAnio(int);
+        void sobreescbirCliente(int,Clientes);
 };
