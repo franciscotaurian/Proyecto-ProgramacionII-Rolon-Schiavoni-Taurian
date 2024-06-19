@@ -10,8 +10,8 @@ using namespace std;
 
 banco banco1;
 Tarjeta nula("Nula", 0);
-Tarjeta credix("Credix", 25000);
-Tarjeta premium("Platinum", 50000);
+Tarjeta credix("Credix", 250000);
+Tarjeta premium("Platinum", 500000);
 
 bool checkletra(char array[]) // Funcion para verificar si el nombre y apellido contienen solo letras
 {
@@ -30,6 +30,7 @@ void menuEmpleado()
 {
     cout << endl;
     cout << "**********MENU**********" << endl;
+    cout << "Que pocos tengo!!" << endl;
     cout << "1) Agregar Cliente" << endl;
     cout << "2) Eliminar Cliente" << endl;
     cout << "3) Mostrar Datos de Cliente" << endl;
@@ -51,100 +52,11 @@ void menuCliente()
     cout << "2) Ver dinero en cuenta" << endl;
     cout << "3) Realizar una transaccion" << endl;
     cout << "4) Pedir una tarjeta" << endl;
+    cout << "5) Ver mis transacciones" << endl;
     cout << "0) Salir" << endl;
     cout << "Ingrese un opcion" << endl;
     cout << "*************************" << endl;
     cout << endl;
-}
-
-
-void transaccionMes(){
-
-    int mes;
-    bool banderatransaccion;
-    string checkmes;
-    do // Ingresar mes de la transacción
-    { 
-        cout << "Ingrese el mes de la transacción: ";
-        cin >> checkmes;
-
-        if (esNumero(checkmes)) // Verificar si el mes ingresado es un número
-        {
-            try
-            {
-                mes = stoi(checkmes); // Convertir la cadena a entero
-                cout << "Numero válido: " << mes << endl;
-                banco1.transaccionMes(mes);
-                banderatransaccion = true;
-            }
-            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
-            {
-                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
-                banderatransaccion = false;
-            }
-        }
-        else // Si el mes ingresado no es un número
-        {
-            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
-            banderatransaccion = false;
-        }
-        if (mes > 12 || mes < 1)
-        { // Verificar si el mes ingresado está dentro del rango del mes posible del año
-            cout << "Debe ingresar un mes valido" << endl;
-            banderatransaccion = false;
-        }
-
-    } while (banderatransaccion == false);
-
-    banderatransaccion = true;
-    
-
-}
-
-void transaccionAnio(){
-    int anio;
-    bool banderatransaccion;
-    string checkanio;
-        do // Ingresar año de la transacción
-    {
-        cout << "Ingrese el año de la transacción: ";
-        cin >> checkanio;
-
-        if (esNumero(checkanio)) // Verificar si el año ingresado es un número
-        {
-            try
-            {
-                anio = stoi(checkanio); // Convertir la cadena a entero
-                cout << "Numero válido: " << anio << endl;
-                banco1.transaccionAnio(anio);
-                banderatransaccion = true;
-            }
-            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
-            {
-                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
-                banderatransaccion = false;
-            }
-        }
-        else // Si el año ingresado no es un número
-        {
-            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
-            banderatransaccion = false;
-        }
-
-        if (anio > 2024 || anio < 0)
-        { // Verificar si el año ingresado es válido
-            cout << "Debe ingresar un Año valido" << endl;
-            banderatransaccion = false;
-        }
-        else
-        {
-            banderatransaccion = true;
-        }
-
-    } while (banderatransaccion == false);
-
-    
-    
 }
 
 bool esNumero(const string &str) // Funcion para verificar si el DNI ingresado es un número
@@ -155,6 +67,99 @@ bool esNumero(const string &str) // Funcion para verificar si el DNI ingresado e
             return false;
     }
     return true;
+}
+
+void transaccionxCliente(int dni2)
+{
+
+    banco1.transaccionCliente(dni2);
+}
+
+void transaccionesMes()
+{
+
+    int mes1;
+    string checkmes1;
+    bool banderames = true;
+
+    do // Ingresar mes de la transacción
+    {
+        cout << "Ingrese el mes de la transacción: ";
+        cin >> checkmes1;
+
+        if (esNumero(checkmes1)) // Verificar si el mes ingresado es un número
+        {
+            try
+            {
+                mes1 = stoi(checkmes1); // Convertir la cadena a entero
+                cout << "Numero válido: " << mes1 << endl;
+                banderames = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderames = false;
+            }
+        }
+        else // Si el mes ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderames = false;
+        }
+        if (mes1 > 12 || mes1 < 1)
+        { // Verificar si el mes ingresado está dentro del rango del mes posible del año
+            cout << "Debe ingresar un mes valido" << endl;
+            banderames = false;
+        }
+
+    } while (banderames == false);
+    banco1.transaccionMes(mes1);
+    banderames = true;
+}
+
+void transaccionesAnio()
+{
+    int anio;
+    bool banderaAnio = true;
+    string checkanio;
+    do // Ingresar año de la transacción
+    {
+        cout << "Ingrese el año de la transacción: ";
+        cin >> checkanio;
+
+        if (esNumero(checkanio)) // Verificar si el año ingresado es un número
+        {
+            try
+            {
+                anio = stoi(checkanio); // Convertir la cadena a entero
+                cout << "Numero válido: " << anio << endl;
+                banderaAnio = true;
+            }
+            catch (const out_of_range &e) // Capturar excepción si el número está fuera del rango permitido
+            {
+                cout << "Numero inválido. El número está fuera del rango permitido para un entero." << endl;
+                banderaAnio = false;
+            }
+        }
+        else // Si el año ingresado no es un número
+        {
+            cout << "Numero inválido. Por favor, ingrese solo números." << endl;
+            banderaAnio = false;
+        }
+
+        if (anio > 2024 || anio < 0)
+        { // Verificar si el año ingresado es válido
+            cout << "Debe ingresar un Año valido" << endl;
+            banderaAnio = false;
+        }
+        else
+        {
+            banderaAnio = true;
+        }
+
+    } while (banderaAnio == false);
+    banco1.transaccionAnio(anio);
+    banderaAnio = true;
 }
 
 bool clienteExistente(int _dni) // Funcion para verificar si el cliente ya existe
@@ -177,7 +182,7 @@ void AgregarCliente() // Funcion para agregar un cliente
 {
     int dni, anioingreso;
     string tipocliente;
-    int limiteCredito;
+    //int limiteCredito;
     int cantClientes = banco1.getnClientes();
     char nombre[20], apellido[20];
     bool bandera = true;
@@ -297,17 +302,17 @@ void AgregarCliente() // Funcion para agregar un cliente
         if (antiguedad < 1)
         {
             tipocliente = "Plata";
-            limiteCredito = 0;
+            //limiteCredito = 0;
         }
         else if (antiguedad >= 1 && antiguedad < 5)
         {
             tipocliente = "Oro";
-            limiteCredito = 25000;
+            //limiteCredito = 250000;
         }
         else if (antiguedad >= 6)
         {
             tipocliente = "Platino";
-            limiteCredito = 50000;
+            //limiteCredito = 500000;
         }
 
         // Crear el cliente
@@ -472,7 +477,7 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
     banderatransaccion = true;
 
     do // Ingresar mes de la transacción
-    { 
+    {
         cout << "Ingrese el mes de la transacción: ";
         cin >> checkmes;
 
@@ -579,14 +584,6 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
 
     banderatransaccion = true;
 
-    // Crear la transaccion con los datos ingresados
-    Transacciones nuevaTransaccion;
-    nuevaTransaccion.setNum_cliente(documentocliente);
-    nuevaTransaccion.setDia(dia);
-    nuevaTransaccion.setMes(mes);
-    nuevaTransaccion.setAnio(anio);
-    nuevaTransaccion.setTipo(tipo_transaccion);
-
     do
     {
         // Ingresar el monto y la moneda de la transacción
@@ -640,7 +637,6 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
     {
         cout << "Ingrese el monto: ";
         cin >> checkmonto;
-        nuevaTransaccion.setMonto(monto);
 
         if (esNumero(checkmonto)) // Verificar si el monto ingresado es un número
         {
@@ -679,6 +675,15 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
             {
                 cliente->setCaja_pesos(cliente->getCaja_pesos() - monto);
                 cout << "Extracción exitosa. El saldo actual en pesos es: " << cliente->getCaja_pesos() << endl;
+                Transacciones nuevaTransaccion;
+                nuevaTransaccion.setNum_cliente(documentocliente);
+                nuevaTransaccion.setDia(dia);
+                nuevaTransaccion.setMes(mes);
+                nuevaTransaccion.setAnio(anio);
+                nuevaTransaccion.setTipo(tipo_transaccion);
+                nuevaTransaccion.setMonto(monto);
+                nuevaTransaccion.setMoneda(moneda);
+                banco1.agregoTransaccion(nuevaTransaccion);
             }
             else
             {
@@ -691,6 +696,15 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
             {
                 cliente->setCaja_dolar(cliente->getCaja_dolar() - monto);
                 cout << "Extracción exitosa. El saldo actual en dólares es: " << cliente->getCaja_dolar() << endl;
+                Transacciones nuevaTransaccion;
+                nuevaTransaccion.setNum_cliente(documentocliente);
+                nuevaTransaccion.setDia(dia);
+                nuevaTransaccion.setMes(mes);
+                nuevaTransaccion.setAnio(anio);
+                nuevaTransaccion.setTipo(tipo_transaccion);
+                nuevaTransaccion.setMonto(monto);
+                nuevaTransaccion.setMoneda(moneda);
+                banco1.agregoTransaccion(nuevaTransaccion);
             }
             else
             {
@@ -704,23 +718,39 @@ void hacerTransaccion(Clientes *cliente) // Funcion para realizar una transacci�
         {
             cliente->setCaja_pesos(cliente->getCaja_pesos() + monto); // Aumentar el saldo en pesos
             cout << "Depósito exitoso. Saldo actual en pesos: " << cliente->getCaja_pesos() << endl;
+            Transacciones nuevaTransaccion;
+            nuevaTransaccion.setNum_cliente(documentocliente);
+            nuevaTransaccion.setDia(dia);
+            nuevaTransaccion.setMes(mes);
+            nuevaTransaccion.setAnio(anio);
+            nuevaTransaccion.setTipo(tipo_transaccion);
+            nuevaTransaccion.setMonto(monto);
+            nuevaTransaccion.setMoneda(moneda);
+            banco1.agregoTransaccion(nuevaTransaccion);
         }
         else if (moneda == 2) // Realizar el depósito en dólares
         {
             cliente->setCaja_dolar(cliente->getCaja_dolar() + monto); // Aumentar el saldo en dólares
             cout << "Depósito exitoso. Saldo actual en dólares: " << cliente->getCaja_dolar() << endl;
+            Transacciones nuevaTransaccion;
+            nuevaTransaccion.setNum_cliente(documentocliente);
+            nuevaTransaccion.setDia(dia);
+            nuevaTransaccion.setMes(mes);
+            nuevaTransaccion.setAnio(anio);
+            nuevaTransaccion.setTipo(tipo_transaccion);
+            nuevaTransaccion.setMonto(monto);
+            nuevaTransaccion.setMoneda(moneda);
+            banco1.agregoTransaccion(nuevaTransaccion);
         }
+
         break;
 
     default:
         cout << "Opcion no valida." << endl;
         break;
     }
-    // Agregar la transacción al cliente
-    nuevaTransaccion.setMonto(monto);
-    nuevaTransaccion.setMoneda(moneda);
-    banco1.agregoTransaccion(nuevaTransaccion);
 }
+
 void verDatos(Clientes *cli)
 {
 
@@ -737,7 +767,6 @@ void pedirTrajeta(Clientes *cli) // Funcion para asignar una tarjeta al cliente
 
     string tipocliente;
     string tipotarjeta;
-    int limiteCredito;
 
     int antiguedad = 2024 - anioingreso;
     if (antiguedad < 1) // Asignar tarjeta Nula
@@ -792,7 +821,6 @@ int main() // Función principal
 
     do // Menú principal
     {
-
         do
         {
 
@@ -906,6 +934,9 @@ int main() // Función principal
                         break;
                     case 4: // Pedir una tarjeta
                         pedirTrajeta(clienteActual);
+                        break;
+                    case 5:
+                        transaccionxCliente(dni);
                         break;
                     case 0: // Salir
                         cout << "Saliendo del menú cliente..." << endl;
@@ -1060,10 +1091,13 @@ int main() // Función principal
                     break;
                 case 5:
                     transaccionestodas();
-                case 6: 
-                    transaccionMes();
-                case 7: 
-                    transaccionAnio();
+                    break;
+                case 6:
+                    transaccionesMes();
+                    break;
+                case 7:
+                    transaccionesAnio();
+                    break;
                 case 0:
                     cout << "Saliendo del menú empleado..." << endl;
                     break;

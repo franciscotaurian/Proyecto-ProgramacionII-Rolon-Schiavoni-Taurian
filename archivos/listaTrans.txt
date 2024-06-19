@@ -4,16 +4,16 @@ Dni del cliente: 46068014.
 Tipo de transaccion: 2.
 Tipo de moneda: Pesos.
 Dia: 12.
-Mes: 8.
+Mes: 12.
 Año: 2024.
-Monto: 100000.
+Monto: 50000.
 --------------------------------------
 
 Dni del cliente: 46068014.
-Tipo de transaccion: 2.
-Tipo de moneda: Dolares.
-Dia: 13.
-Mes: 8.
-Año: 2024.
-Monto: 10000.
+Tipo de transaccion: 1.
+Tipo de moneda: Pesos.
+Dia: 12.
+Mes: 9.
+Año: 2020.
+Monto: 5000.
 --------------------------------------

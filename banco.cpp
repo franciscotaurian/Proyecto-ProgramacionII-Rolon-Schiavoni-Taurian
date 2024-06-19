@@ -145,12 +145,15 @@ void banco::muestraTransacciones()
     }
 }
 
-
-void banco::transaccionAnio(int anio){
+void banco::transaccionAnio(int anio)
+{
     cout << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+    bool transanio = true;
 
-    for (int i = 0; i < ntransacciones; i++) {
-        if (historial[i].getAnio() == anio) {
+    for (int i = 0; i <= ntransacciones; i++)
+    {
+        if (historial[i].getAnio() == anio)
+        {
             cout << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
             cout << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
             cout << "Tipo de moneda: " << historial[i].getMoneda() << "." << endl;
@@ -159,15 +162,24 @@ void banco::transaccionAnio(int anio){
             cout << "Año: " << historial[i].getAnio() << "." << endl;
             cout << "Monto: " << historial[i].getMonto() << "." << endl;
             cout << "--------------------------------------" << endl;
+            transanio = false;
         }
+    }
+    if (transanio == true)
+    {
+        cout << "No hay transacciones en este año" << endl;
     }
 }
 
-void banco::transaccionMes(int mes) {
+void banco::transaccionMes(int mes)
+{
     cout << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+    bool transmes = true;
 
-    for (int i = 0; i < ntransacciones; i++) {
-        if (historial[i].getMes() == mes) {
+    for (int i = 0; i <= ntransacciones; i++)
+    {
+        if (historial[i].getMes() == mes)
+        {
             cout << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
             cout << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
             cout << "Tipo de moneda: " << historial[i].getMoneda() << "." << endl;
@@ -176,9 +188,43 @@ void banco::transaccionMes(int mes) {
             cout << "Año: " << historial[i].getAnio() << "." << endl;
             cout << "Monto: " << historial[i].getMonto() << "." << endl;
             cout << "--------------------------------------" << endl;
+            transmes == false;
         }
     }
+    if (transmes == true)
+    {
+        cout << "No existe ninguna transaccion en el mes" << endl;
+    }
 }
+
+void banco::transaccionCliente(int numdoc)
+{
+    cout << "-------------LISTADO DE TRANSACCIONES----------" << endl;
+    bool transcli = true;
+
+    for (int i = 0; i <= ntransacciones; i++)
+    {
+        if (historial[i].getNum_cliente() == numdoc)
+        {
+            cout << "Dni del cliente: " << historial[i].getNum_cliente() << "." << endl;
+            cout << "Tipo de transaccion: " << historial[i].getTipo() << "." << endl;
+            cout << "Tipo de moneda: " << historial[i].getMoneda() << "." << endl;
+            cout << "Dia: " << historial[i].getDia() << "." << endl;
+            cout << "Mes: " << historial[i].getMes() << "." << endl;
+            cout << "Año: " << historial[i].getAnio() << "." << endl;
+            cout << "Monto: " << historial[i].getMonto() << "." << endl;
+            cout << "--------------------------------------" << endl;
+            transcli == false;
+        }
+    }
+    if (transcli == false)
+    {
+        cout << "No existe ninguna transaccion de este cliente" << endl;
+    }
+}
+
+
+
 
 Clientes *banco::getlistado()
 {

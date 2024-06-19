@@ -1,8 +1,8 @@
 -------------LISTADO DE CLIENTES----------
 
 Cliente n: 0:
-Nombre: asda.
-Apellido: asdasd.
+Nombre: Francisco.
+Apellido: Taurian.
 Dni: 46068014.
 Tipo de cliente: Platino.
 ------------------------------

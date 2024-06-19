@@ -29,6 +29,7 @@ class banco {
         void muestraDatos (int);
         void agregoTransaccion(Transacciones);
         void altaClientes(Clientes);
+        void transaccionCliente(int);
         void bajaClientes(int);
         void transaccionMes(int);
         void transaccionAnio(int);
