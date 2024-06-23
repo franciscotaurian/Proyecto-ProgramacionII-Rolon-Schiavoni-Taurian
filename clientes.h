@@ -14,7 +14,6 @@ class Clientes:public Persona{
         string tipocliente;
         int anioingreso;
         string estado;
-        Transacciones transaccion_cliente;
         Tarjeta tipotarjeta;
         int caja_pesos;
         int caja_dolar;
@@ -37,10 +36,7 @@ class Clientes:public Persona{
         string getEstado();
         string getTipocliente();
         Tarjeta getTipotarjeta();
-        Transacciones gettransacciones();
         void consultar_saldo();
-        void agregarTransaccion(Transacciones);
-        void pedir_baja();
 };
 
 #endif // CLIENTES_H

@@ -76,10 +76,6 @@ string Clientes::getTipocliente() {
     return tipocliente;
 }
 
-Transacciones Clientes::gettransacciones() {
-    return transaccion_cliente;
-}
-
 Tarjeta Clientes::getTipotarjeta(){
     return tipotarjeta;
 }

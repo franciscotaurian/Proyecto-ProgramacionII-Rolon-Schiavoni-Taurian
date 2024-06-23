@@ -965,17 +965,8 @@ int main() // Función principal
     int tipoUsuario;
     string checktipoUsuario, checkDni;
     bool banderatipoUsuario;
-    int contador = 0;
-    char nombreB[20], direccionB[20];
-    cout << "Ingrese el nombre del banco: ";
-    cin.ignore();
-    cin.getline(nombreB, 20);
-    cout << "Ingrese la dirección del banco: ";
-    cin.getline(direccionB, 20);
-
     leerArchivoClientes();
     leerArchivoTransacciones();
-    contador++;
     do // Menú principal
     {
 

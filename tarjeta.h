@@ -17,7 +17,6 @@ public:
     void setLimiteCredito(int);
     string getTipotarj();
     int getLimiteCredito();
-    //void asignarTarjeta(Clientes&);
 };
 
 #endif
