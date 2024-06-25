@@ -1,0 +1,19 @@
+-------------LISTADO DE CLIENTES----------
+
+Cliente n: 0:
+Nombre: Francisco.
+Apellido: Taurian.
+Dni: 46068014.
+Tipo de cliente: Oro.
+Caja en pesos: 51789.
+Caja en dolares: 0.
+------------------------------
+
+Cliente n: 1:
+Nombre: Candelaria .
+Apellido: Rolon.
+Dni: 458233247.
+Tipo de cliente: Platino.
+Caja en pesos: 0.
+Caja en dolares: 5000.
+------------------------------

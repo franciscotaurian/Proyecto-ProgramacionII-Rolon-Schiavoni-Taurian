@@ -183,7 +183,6 @@ void menuEmpleado()
 {
     cout << endl;
     cout << "**********MENU**********" << endl;
-    cout << "Que pocos tengo!!" << endl;
     cout << "1) Agregar Cliente" << endl;
     cout << "2) Eliminar Cliente" << endl;
     cout << "3) Mostrar Datos de Cliente" << endl;
